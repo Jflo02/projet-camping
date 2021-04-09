@@ -13,6 +13,7 @@
 
 <body>
     <?php
+    //test après les bug
     include("./en-tete.php");
     include("./menu.php");
     include("./footer.html");
