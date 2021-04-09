@@ -1,3 +1,4 @@
+
 <?php
 session_start(); //pour demarrer la session
 
@@ -29,15 +30,19 @@ if (isset($_GET['logout'])) {
 <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
 
 <link rel="stylesheet" href="./styles.css" />
+<link rel="stylesheet" href="en-tete.css" />
 
-
-    <div class="container-fluid bg-secondary">
+    <div class="container-fluid " id="div-en-tete">
         <div class="row">
 
-            <div class="col align-self-start">
+
+            <div class="col-2 align-self-start">
                 <img src="./logo.png" alt="Logo du camping" width="5%">
             </div>
-            <div class="colalign-self-end">
+            <div class="col-8 center-block text-center">
+                <h1 class="text-center bolder-weight-text" id="text-camping">Camping Piscine Hashtag Plaisir</h1>
+            </div>
+            <div class="col-2 right-block text-right">
                 <?php
                 if (!isset($_SESSION['id_user'])) {
                     echo '<a href="./login.php" class="text-light">Se connecter</a>';
@@ -51,6 +56,9 @@ if (isset($_GET['logout'])) {
                     echo '</p><br><br><a href="./index.php?logout=1" class="text-light">Se deconnecter</a><br><br>';
                 }
                 ?>
+                
             </div>
     </div>
 </div>
+</body>
+</html>
