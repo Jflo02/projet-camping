@@ -15,7 +15,6 @@
     //on met l'en-tete
     include("./en-tete.php");
     //include("./menu.php");
-    //essaie
 
 
 
