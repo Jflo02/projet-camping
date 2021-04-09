@@ -63,6 +63,7 @@
                     echo 'Hello ' . (($_SESSION['type'] == "Administrateur") ? "Administrateur " : "client ") . $_SESSION['nom_user'] . ' ' . $_SESSION['prenom_user'];
                     echo '<br><a href="./login.php?logout=1">Se deconnecter</a><br><br>';
                     echo '<br><a href="./">Aller à l\'acceuil</a><br><br>';
+                    echo '<br><a href="./Mon_compte/mon_compte.php?c=defaut">Aller à mon_compte</a><br><br>';
                 }
 
 
