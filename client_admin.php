@@ -65,6 +65,8 @@ switch ($_GET['c']) {
             die("<br>Echec d'execution de la requete : " . $sql);
         } else {
             echo "Ajout OK !";
+            echo "Enregistrement mis à jour<br><br>";
+            echo '<a href="./client_admin.php?c=default">Retour aux clients</a>';
         }
         break;
     
@@ -114,18 +116,13 @@ switch ($_GET['c']) {
     
     case 'update':
 
-        foreach ($_GET as $key => $Value) {
-            if (empty($Value)) {
-                die("Il manque une valeur pour " . $key);
-            }
-        }
         $sql = "UPDATE client SET nom='" . $_GET['nom_pers'] . "', prenom='" . $_GET['prenom_pers'] . "',date_naissance='" . $_GET['DN_pers'] . "',mail='" . $_GET['mail'] . "', telephone='" . $_GET['telephone'] . "', adresse='" . $_GET['adresse'] . "', cp_ville='" . $_GET['cp_ville'] ."', ville='" . $_GET['ville'] . "' where id_client=" . $_GET['id_client'];
         $stmt = mysqli_query($conn, $sql);
         if ($stmt == FALSE) {
             die("<br>Echec d'execution de la requete : " . $sql);
         } else {
             echo "Enregistrement mis à jour<br><br>";
-            echo '<a href="./client_admin.php?c=default">Retour à mon compte</a>';
+            echo '<a href="./client_admin.php?c=default">Retour aux clients</a>';
         }
         break;
     
