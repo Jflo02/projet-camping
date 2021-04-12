@@ -1,3 +1,59 @@
+<?php 
+
+$erreur_login=FALSE;
+
+if (isset($_POST['mdp_user'])) {
+    //ici on se connecte a la base sql
+    include("../connexion.php");
+
+    
+
+
+    $sql = 'SELECT * from Client where mail=\'' . $_POST["mail_user"] . '\' and mdp_client=\'' . $_POST["mdp_user"] . '\'';
+    //$sql = 'SELECT * from Client' ;
+
+    $resultat = mysqli_query($conn, $sql);
+
+    if ($resultat == FALSE) {
+        die("<br>Echec d'execution de la requete : " . $sql);
+    } else {
+        if (mysqli_num_rows($resultat) == 1) {
+
+            $row = mysqli_fetch_array($resultat);
+            $_SESSION['id_user'] = $row['id_client'];
+            $_SESSION['nom_user'] = $row['nom'];
+            $_SESSION['prenom_user'] = $row['prenom'];
+            $_SESSION['type'] = "client";
+
+
+            $backslash = chr(92);
+            $login_position=getcwd();
+            $tableau = explode ($backslash , $login_position );
+            $location = 'http://localhost' ;
+            foreach ($tableau as $cle => $valeur){
+                if ($cle < 3) continue;
+                    $location=$location.'/'. $valeur;
+            }
+            $location=$location . '/index.php';
+            
+            header("Location: $location");
+            exit();
+        
+            }else{
+                $erreur_login=TRUE;
+            }
+
+            
+
+            
+            
+        
+    }
+    }
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -25,33 +81,11 @@
             
                 <?php
 
-
-
-                if (isset($_POST['mdp_user'])) {
-                    //ici on se connecte a la base sql
-                    include("../connexion.php");
-
-
-
-
-                    $sql = 'SELECT * from Client where mail=\'' . $_POST["mail_user"] . '\' and mdp_client=\'' . $_POST["mdp_user"] . '\'';
-                    $resultat = mysqli_query($conn, $sql);
-                    if ($resultat == FALSE) {
-                        die("<br>Echec d'execution de la requete : " . $sql);
-                    } else {
-                        if (mysqli_num_rows($resultat) == 1) {
-
-                            $row = mysqli_fetch_array($resultat);
-                            $_SESSION['id_user'] = $row['id_client'];
-                            $_SESSION['nom_user'] = $row['nom'];
-                            $_SESSION['prenom_user'] = $row['prenom'];
-                            $_SESSION['type'] = "client";
-
-                            
-                            
-                        }
-                    }
+                if ($erreur_login){
+                    echo 'Identifiant ou mot de passe incorrecte' ;
                 }
+
+               
 
 
 
