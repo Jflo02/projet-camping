@@ -10,7 +10,7 @@
 
 <body>
 
-    <?php
+    <?php 
     include("./en-tete.php");
     //ici on se connecte a la base sql
     include("../connexion.php");

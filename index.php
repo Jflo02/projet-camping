@@ -14,12 +14,19 @@
 <body>
     <?php
     //test après les bug
+    include('./session.php');
     include("./en-tete.php");
     include("./menu.php");
-    include("./footer.html");
     ?>
+    <div class="container">
+            <p class="jumbotron"><a href="./chalet.php">Voir nos chalets</a></p>
+    </div>
+
 
 
 </body>
+<?php
+include("./footer.html");
+?>
 
 </html>

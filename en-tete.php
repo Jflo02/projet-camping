@@ -1,15 +1,4 @@
 
-<?php
-session_start(); //pour demarrer la session
-
-// si l utilisateur clique sur se deconnecter alors on detruit la session et on efface la varible $_SESSION
-if (isset($_GET['logout'])) {
-    if ($_GET['logout'] == "1") {
-        session_destroy();
-        unset($_SESSION);
-    }
-}
-?>
 <!--
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -36,33 +25,34 @@ if (isset($_GET['logout'])) {
 <link rel="stylesheet" href="./styles.css" />
 <link rel="stylesheet" href="en-tete.css" />
 
-    <div class="container-fluid " id="div-en-tete">
-        <div class="row">
+<div class="container-fluid " id="div-en-tete">
+    <div class="row">
 
 
-            <div class="col-2 align-self-start">
-                <img src="./logo.png" alt="Logo du camping" width="5%">
-            </div>
-            <div class="col-8 center-block text-center">
-                <h1 class="text-center bolder-weight-text" id="text-camping">Camping Piscine Hashtag Plaisir</h1>
-            </div>
-            <div class="col-2 right-block text-right">
-                <?php
-                if (!isset($_SESSION['id_user'])) {
-                    echo '<a href="./login.php" class="text-light">Se connecter</a>';
-                    echo '<br>';
-                    echo '<a href="./creation_compte.php?c=test" class="text-light">S\'inscrire</a>';
-                } else {
+        <div class="col-2 align-self-start">
+            <img src="./photos/logo.png" alt="Logo du camping" width="100%">
+        </div>
+        <div class="col-8 center-block text-center">
+            <h1 class="text-center bolder-weight-text" id="text-camping">Camping Piscine Hashtag Plaisir</h1>
+        </div>
+        <div class="col-2 right-block text-right">
+            <?php
+            if (!isset($_SESSION['id_user'])) {
+                echo '<a href="./login.php" class="text-light">Se connecter</a>';
+                echo '<br>';
+                echo '<a href="./creation_compte.php?c=test" class="text-light">S\'inscrire</a>';
+            } else {
 
-                    echo '<p class="text-light">Connecté en tant que :' . $_SESSION['prenom_user'] . '</p>';
-                    echo '<br><br><p class="text-light">';
-                    echo  $_SESSION['type'];
-                    echo '</p><br><br><a href="./index.php?logout=1" class="text-light">Se deconnecter</a><br><br>';
-                }
-                ?>
-                
-            </div>
+                echo '<p class="text-light">Connecté en tant que :' . $_SESSION['prenom_user'] . '</p>';
+                echo '<br><br><p class="text-light">';
+                echo  $_SESSION['type'];
+                echo '</p><br><br><a href="./index.php?logout=1" class="text-light">Se deconnecter</a><br><br>';
+            }
+            ?>
+
+        </div>
     </div>
 </div>
 </body>
+
 </html>

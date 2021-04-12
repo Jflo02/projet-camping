@@ -1,6 +1,6 @@
-<?php 
-
-$erreur_login=FALSE;
+<?php
+include('./session.php');
+$erreur_login = FALSE;
 
 if (isset($_POST['mdp_user'])) {
     //ici on se connecte a la base sql
@@ -8,7 +8,7 @@ if (isset($_POST['mdp_user'])) {
 
 
     $sql = 'SELECT * from Client where mail=\'' . $_POST["mail_user"] . '\' and mdp_client=\'' . $_POST["mdp_user"] . '\'';
-    //$sql = 'SELECT * from Client' ;
+
 
     $resultat = mysqli_query($conn, $sql);
 
@@ -24,21 +24,49 @@ if (isset($_POST['mdp_user'])) {
             $_SESSION['type'] = "client";
 
             $url = $_SERVER['HTTP_REFERER'];
-            $tableau = explode ("/", $url, -1);
-            $location="";
-            foreach ($tableau as $valeur){
+            $tableau = explode("/", $url, -1);
+            $location = "";
+            foreach ($tableau as $valeur) {
                 $location = $location . $valeur . "/";
             }
             $location = $location . 'index.php';
             header("Location: $location");
             exit();
-        
-            }else{
-                $erreur_login=TRUE;
-            }                
+        } else {
+
+            $sql = 'SELECT * from administrateur where login_administrateur=\'' . $_POST["mail_user"] . '\' and mdp_administrateur=\'' . $_POST["mdp_user"] . '\'';
+
+
+            $resultat = mysqli_query($conn, $sql);
+            if ($resultat == FALSE) {
+                die("<br>Echec d'execution de la requete : " . $sql);
+            } else {
+                if (mysqli_num_rows($resultat) == 1) {
+
+                    $row = mysqli_fetch_array($resultat);
+                    $_SESSION['id_user'] = $row['id'];
+                    $_SESSION['nom_user'] = $row['login_administrateur'];
+                    $_SESSION['prenom_user'] = $row['login_administrateur'];
+                    $_SESSION['type'] = "admin";
+
+                    $url = $_SERVER['HTTP_REFERER'];
+                    $tableau = explode("/", $url, -1);
+                    $location = "";
+                    foreach ($tableau as $valeur) {
+                        $location = $location . $valeur . "/";
+                    }
+                    $location = $location . 'index.php';
+                    header("Location: $location");
+                    exit();
+                } else {
+
+
+                    $erreur_login = TRUE;
+                }
+            }
         }
     }
-
+}
 ?>
 
 
@@ -46,7 +74,7 @@ if (isset($_POST['mdp_user'])) {
 <html>
 
 <head>
-<meta charset="utf-8" />
+    <meta charset="utf-8" />
     <meta http-equiv="Expires" content="0">
     <title>Login</title>
     <link rel="stylesheet" href="styles.css" />
@@ -66,14 +94,14 @@ if (isset($_POST['mdp_user'])) {
     <div class="container">
         <div class="row">
             <div class="col">
-            
+
                 <?php
 
-                if ($erreur_login){
-                    echo 'Identifiant ou mot de passe incorrecte' ;
+                if ($erreur_login) {
+                    echo 'Identifiant ou mot de passe incorrecte';
                 }
 
-               
+
 
 
 
@@ -84,7 +112,7 @@ if (isset($_POST['mdp_user'])) {
 
                     echo 'Hello ' . (($_SESSION['type'] == "Administrateur") ? "Administrateur " : "client ") . $_SESSION['nom_user'] . ' ' . $_SESSION['prenom_user'];
                     echo '<br><a href="./login.php?logout=1">Se deconnecter</a><br><br>';
-                    echo '<br><a href="./">Aller à l\'acceuil</a><br><br>';
+                    echo '<br><a href="./index.php">Aller à l\'acceuil</a><br><br>';
                 }
 
 
