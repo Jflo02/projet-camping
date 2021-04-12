@@ -18,7 +18,7 @@
           ?>
 
             
-            <li><a href="./Mon_compte/mon_compte.php?c=default">Mon compte</a></li>
+            <li><a href="./mon_compte.php?c=default">Mon compte</a></li>
 
             <?php
             if ($_SESSION['type'] == "Administrateur") {
@@ -28,12 +28,12 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration</a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Clients</a></li>
+                  <li><a href="./client_admin.php">Clients</a></li>
                   <li><a href="#">Réservations</a></li>
                   <li><a href="#">Chalets</a></li>
                   <li><a href="#">Saisons</a></li>
                   <li><a href="#">Semaines</a></li>
-                  <li><a href="#">Types</a></li>
+                  <li><a href="./type_chalet.php">Types</a></li>
 
 
                 </ul>
