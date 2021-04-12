@@ -28,12 +28,12 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration</a>
                 <ul class="dropdown-menu">
-                  <li><a href="./client_admin.php">Clients</a></li>
+                  <li><a href="./client_admin.php?c=defaut">Clients</a></li>
                   <li><a href="#">Réservations</a></li>
-                  <li><a href="#">Chalets</a></li>
+                  <li><a href="./chalet_admin.php?c=defaut">Chalets</a></li>
                   <li><a href="#">Saisons</a></li>
                   <li><a href="#">Semaines</a></li>
-                  <li><a href="./type_chalet.php">Types</a></li>
+                  <li><a href="./type_chalet.php?c=defaut">Types</a></li>
 
 
                 </ul>
