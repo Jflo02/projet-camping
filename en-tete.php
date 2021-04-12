@@ -30,7 +30,7 @@
 
 
         <div class="col-2 align-self-start">
-            <img src="./logo.png" alt="Logo du camping" width="100%">
+            <img src="./photos/logo.png" alt="Logo du camping" width="100%">
         </div>
         <div class="col-8 center-block text-center">
             <h1 class="text-center bolder-weight-text" id="text-camping">Camping Piscine Hashtag Plaisir</h1>
