@@ -21,7 +21,7 @@
             <li><a href="./mon_compte.php?c=default">Mon compte</a></li>
 
             <?php
-            if ($_SESSION['type'] == "Administrateur") {
+            if ($_SESSION['type'] == "admin") {
             ?>
 
 
