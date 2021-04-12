@@ -10,16 +10,15 @@
       <div class="nav-collapse">
         <ul class="nav">
           <li><a href="./index.php">Acceuil</a></li>
-          <li><a href="./liste_circuits.php?c=default">Circuits</a></li>
+          <li><a href="#">Activités</a></li>
 
           
           <?php
           if (isset($_SESSION['type'])) {
           ?>
 
-            <li><a href="./historique.php">Historique</a></li>
-            <li><a href="./planning.php">Planning</a></li>
-            <li><a href="./moncompte.php?c=default">Mon compte</a></li>
+            
+            <li><a href="./Mon_compte/mon_compte.php?c=default">Mon compte</a></li>
 
             <?php
             if ($_SESSION['type'] == "Administrateur") {
@@ -29,10 +28,12 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration</a>
                 <ul class="dropdown-menu">
-                  <li><a href="./personne.php?c=default">Personnes</a></li>
-                  <li><a href="./administrateur.php?c=default">Administrateurs</a></li>
-                  <li><a href="./client.php?c=default">Clients</a></li>
-                  <li><a href="./lieu.php?c=default">Lieux</a></li>
+                  <li><a href="#">Clients</a></li>
+                  <li><a href="#">Réservations</a></li>
+                  <li><a href="#">Chalets</a></li>
+                  <li><a href="#">Saisons</a></li>
+                  <li><a href="#">Semaines</a></li>
+                  <li><a href="#">Types</a></li>
 
 
                 </ul>

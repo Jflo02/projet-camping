@@ -11,9 +11,9 @@
 <body>
 
     <?php 
-    include("../en-tete.php");
+    include("./en-tete.php");
     //ici on se connecte a la base sql
-    include("../../connexion.php");
+    include("../connexion.php");
 
 
     echo '<a href="#">Voir les clients</a>';

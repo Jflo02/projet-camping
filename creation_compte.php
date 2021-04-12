@@ -12,7 +12,7 @@
 
     //on met l'en-tete
     include("./en-tete.php");
-    //include("./menu.php");
+    include("./menu.php");
 
 
 
@@ -49,40 +49,73 @@
 
         default: //créer un compte si on est client lambda
     ?>
-            <form action="./creation_compte.php" method="get">
-                <label for="nom">Nom:</label>
-                <input type="text" id="nom_pers" name="nom_pers" required="required"><br><br>
 
-                <label for="prenom">Prenom:</label>
-                <input type="text" id="prenom_pers" name="prenom_pers" required="required"><br><br>
+            <div class="container">
+                <div class=" text-center mt-5 ">
+                    <h1>Inscription</h1>
+                </div>
+                <div class="row ">
+                    <div class="col-lg-7 mx-auto">
+                        <div class="card mt-2 mx-auto p-4 bg-light">
+                            <div class="card-body bg-light">
+                                <div class="container">
+                                    <form id="contact-form" role="form" action="./creation_compte.php" method="get">
+                                        <div class="controls">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="prenom_pers">Prénom</label> <input id="prenom_pers" type="text" name="prenom_pers" class="form-control" placeholder="Entrez votre prénom" required="required" data-error="Entrez votre prénom."> </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="nom_pers">Nom</label> <input id="nom_pers" type="text" name="nom_pers" class="form-control" placeholder="Entrez votre nom de famille" required="required" data-error="Entrez votre nom de famille."> </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="mail_pers">Email</label> <input id="mail_pers" type="email" name="mail_pers" class="form-control" placeholder="Entrez votre email" required="required" data-error="Entrez un email valide."> </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="DN_pers">Date De Naissance</label> <input id="DN_pers" type="date" name="DN_pers" class="form-control" placeholder="Date de naissance" required="required" data-error="Entrez une date de naissance."> </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="mdp_pers">Mot de passe</label> <input id="mdp_pers" type="password" name="mdp_pers" class="form-control" placeholder="Entrez votre mot de passe" required="required" data-error="Entrez votre mot de passe" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"> </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="tel_pers">Telephone</label> <input id="tel_pers" type="text" name="tel_pers" class="form-control" placeholder="Entrez votre telephone" required="required" data-error="Entrez votre telephone"> </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="cp_pers">Code Postal</label> <input id="cp_pers" type="text" name="cp_pers" class="form-control" placeholder="Entrez votre code postal" required="required" data-error="Entrez votre code postal"> </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="adresse_pers">Adresse</label> <input id="adresse_pers" type="text" name="adresse_pers" class="form-control" placeholder="Entrez votre adresse" required="required" data-error="Entrez votre adresse"> </div>
+                                                </div>
+                                            </div>
 
-                <label for="Date_Naissance">Date de naissance:</label>
-                <input type="date" id="DN_pers" name="DN_pers" required="required"><br><br>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="ville_pers">Ville</label> <input id="ville_pers" type="text" name="ville_pers" class="form-control" placeholder="Entrez votre ville" required="required" data-error="Entrez votre ville"> </div>
+                                                </div>
 
-                <label for="password">Mot de passe :</label>
-                <input type="password" id="mdp_pers" name="mdp_pers" minlength="8" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"><br><br>
-                <p>8 caractères d'au moins un chiffre et une lettre majuscule et minuscule</p>
-
-                <label for="Personne_Mail">Mail:</label>
-                <input type="text" id="mail_pers" name="mail_pers" required="required"><br><br>
-
-                <label for="Personne_tel">Telephone:</label>
-                <input type="text" id="tel_pers" name="tel_pers" required="required"><br><br>
-
-                <label for="Personne_cp">Code postal:</label>
-                <input type="text" id="cp_pers" name="cp_pers" required="required"><br><br>
-
-                <label for="Personne_Mail">Ville:</label>
-                <input type="text" id="ville_pers" name="ville_pers" required="required"><br><br>
-
-                <label for="Personne_adresse">Adresse:</label>
-                <input type="text" id="adresse_pers" name="adresse_pers" required="required"><br><br>
+                                            </div>
 
 
 
-                <input type="hidden" name="c" value="add">
-                <input type="submit" value="Envoyer">
-            </form>
+                                            <div class="row">
+                                                <input type="hidden" name="c" value="add">
+                                                <div class="col-md-12"> <input type="submit" class="btn btn-success btn-send pt-2 btn-block " value="S'inscrire"> </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
     <?php
             break;
     }
@@ -90,5 +123,9 @@
 
 
 </body>
+<br><br>
+<?php
+include("./footer.html");
+?>
 
 </html>
