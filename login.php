@@ -6,8 +6,6 @@ if (isset($_POST['mdp_user'])) {
     //ici on se connecte a la base sql
     include("../connexion.php");
 
-    
-
 
     $sql = 'SELECT * from Client where mail=\'' . $_POST["mail_user"] . '\' and mdp_client=\'' . $_POST["mdp_user"] . '\'';
     //$sql = 'SELECT * from Client' ;
@@ -25,30 +23,20 @@ if (isset($_POST['mdp_user'])) {
             $_SESSION['prenom_user'] = $row['prenom'];
             $_SESSION['type'] = "client";
 
-
-            $backslash = chr(92);
-            $login_position=getcwd();
-            $tableau = explode ($backslash , $login_position );
-            $location = 'http://localhost' ;
-            foreach ($tableau as $cle => $valeur){
-                if ($cle < 3) continue;
-                    $location=$location.'/'. $valeur;
+            $url = $_SERVER['HTTP_REFERER'];
+            $tableau = explode ("/", $url, -1);
+            $location="";
+            foreach ($tableau as $valeur){
+                $location = $location . $valeur . "/";
             }
-            $location=$location . '/index.php';
-            
+            $location = $location . 'index.php';
             header("Location: $location");
             exit();
         
             }else{
                 $erreur_login=TRUE;
-            }
-
-            
-
-            
-            
-        
-    }
+            }                
+        }
     }
 
 ?>
