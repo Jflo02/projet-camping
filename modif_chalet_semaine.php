@@ -32,7 +32,8 @@
                     $sql="SELECT * from semaine where date_debut='".$_GET['date']. "'";
                     $resultat = mysqli_query($conn, $sql);
                     $row = mysqli_fetch_assoc($resultat);
-                    $id_semaine=$row['id_semaine']
+                    $id_semaine=$row['id_semaine'];
+                    
 
                     $sql = "SELECT * from prix_special where id_chalet=" . $_GET['id_chalet'] . "and id_semaine=" . $_GET['date'];
                     $resultat = mysqli_query($conn, $sql);

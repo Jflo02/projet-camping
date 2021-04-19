@@ -85,7 +85,7 @@
             echo $_GET['id_chalet'];
 
             $sql = "UPDATE chalet SET id_type_chalet='" . $_GET['id_type_chalet'] . "' where id_chalet='" . $_GET['id_chalet']."'";
-            echo $sql;
+    
             $stmt = mysqli_query($conn, $sql);
             if ($stmt == FALSE) {
                 die("<br>Echec d'execution de la requete : " . $sql);
@@ -124,7 +124,7 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col align-self-center">
-                            <p>Liste des clients</p>
+                            <p>Liste des chalets</p>
                             <p><br><a href='./chalet_admin.php?c=create'>Ajouter</a></p>
 
                             <table class="table table-striped">
