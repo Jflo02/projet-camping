@@ -20,8 +20,6 @@
     switch ($_GET['c']) {
 
 
-
-
         case 'create':
 
     ?>
@@ -30,25 +28,73 @@
                 <br></br>
             <form action="./chalet_admin.php" method="get">
                 <label for="libelle">Mini :</label>
-                <input type="radio" id="id_type_chalet" name="1"><br><br>
+                <input type="radio" id="id_type_chalet" name="id_type_chalet" value="1" checked><br><br>
 
                 <label for="libelle">Grand :</label>
-                <input type="radio" id="id_type_chalet" name="2"><br><br>
+                <input type="radio" id="id_type_chalet" name="id_type_chalet" value="2"><br><br>
 
                 <label for="libelle">Grand Luxe :</label>
-                <input type="radio" id="id_type_chalet" name="3"><br><br>
+                <input type="radio" id="id_type_chalet" name="id_type_chalet" value="3"><br><br>
                 <input type="hidden" name="c" value="add">
                 <input type="submit" value="Appuie">
             </form>
             </form>
             </p>
 
-            <?php
+        <?php
+            break;
         case 'add':
 
-
+            $sql = "INSERT INTO chalet (id_type_chalet) values ('" . $_GET['id_type_chalet'] . "')";
+            $resultat = mysqli_query($conn, $sql);
+            if ($resultat == FALSE) {
+                die("<br>Echec d'execution de la requete : " . $sql);
+            } else {
+                echo "Ajout OK !";
+                echo "Enregistrement mis à jour<br><br>";
+                echo '<a href="./chalet_admin.php?c=default">Retour aux chalets</a>';
+            }
 
             break;
+
+
+        case 'read':
+            echo $_GET['id_chalet'];
+        ?>
+            <form action="./chalet_admin.php" method="get">
+
+                <label for="libelle">Mini :</label>
+                <input type="radio" id="id_type_chalet" name="id_type_chalet" value="1" checked><br><br>
+
+                <label for="libelle">Grand :</label>
+                <input type="radio" id="id_type_chalet" name="id_type_chalet" value="2"><br><br>
+
+                <label for="libelle">Grand Luxe :</label>
+                <input type="radio" id="id_type_chalet" name="id_type_chalet" value="3"><br><br>
+        
+                <input type="hidden" name="id_chalet" value="<?php echo $_GET['id_chalet'] ?>">
+                <input type="hidden" name="c" value="update">
+
+                <input type="submit" value="Appuie pour faire les changements">
+            </form>
+
+            <?php
+            break;
+        
+        case 'update':
+            echo $_GET['id_chalet'];
+
+            $sql = "UPDATE chalet SET id_type_chalet='" . $_GET['id_type_chalet'] . "' where id_chalet='" . $_GET['id_chalet']."'";
+            echo $sql;
+            $stmt = mysqli_query($conn, $sql);
+            if ($stmt == FALSE) {
+                die("<br>Echec d'execution de la requete : " . $sql);
+            } else {
+                echo "Enregistrement mis à jour<br><br>";
+                echo '<a href="./chalet_admin.php?c=default">Retour aux chalets</a>';
+            }
+            break;
+
 
 
 
@@ -59,6 +105,9 @@
             $resultat = mysqli_query($conn, $sql);
             if ($resultat == FALSE) {
                 die("<br>Echec d'execution de la requete : " . $sql);
+            }else {
+                echo "Enregistrement mis à jour<br><br>";
+                echo '<a href="./chalet_admin.php?c=default">Retour aux chalets</a>';
             }
             break;
 
@@ -82,7 +131,7 @@
                                 <tr>
                                     <td>libelle</td>
                                     <td>prix</td>
-                                    <td>id_chalet</td>
+                                    <td>numéro du chalet</td>
                                     <td></td>
                                 </tr>
                             <?php
@@ -92,7 +141,8 @@
                                 echo "<td>" . $row['prix_base'] . "</td>";
                                 echo "<td>" . $row['id_chalet'] . "</td>";
                                 echo "<td><a href=./chalet_admin.php?c=del&id_chalet=" . $row['id_chalet'] . ">supprimer</a></td>";
-                                echo "<td><a href=./chalet_admin.php?c=read&id_client=" . $row['id_chalet'] . ">éditer</a></td>";
+                                echo "<td><a href=./chalet_admin.php?c=read&id_chalet=" . $row['id_chalet'] . ">éditer</a></td>";
+                                echo "<td><a href=./modif_chalet_semaine.php?c=default&id_chalet=" . $row['id_chalet'] . ">modifier le prix du chalet</a></td>";
                             }
                             echo "</tr>";
                         }
@@ -114,5 +164,9 @@
         ?>
 
 </body>
+
+<?php
+    include("./footer.html")
+?>
 
 </html>
