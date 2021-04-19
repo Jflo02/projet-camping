@@ -10,7 +10,7 @@
       <div class="nav-collapse">
         <ul class="nav">
           <li><a href="./index.php">Accueil</a></li>
-          <li><a href="#">Activités</a></li>
+          <li><a href="./activites.php">Activités</a></li>
 
           
           <?php
