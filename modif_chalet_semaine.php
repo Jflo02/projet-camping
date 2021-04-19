@@ -34,21 +34,19 @@
                     $row = mysqli_fetch_assoc($resultat);
                     $id_semaine = $row['id_semaine'];
 
-
-
-
-                    $sql = "SELECT * from prix_special where id_chalet=" . $_GET['id_chalet'] . "and id_semaine='" . $id_semaine . "'";
+                    $sql = "SELECT * from prix_special where id_chalet=" . $_GET['id_chalet'] . " and id_semaine=" . $id_semaine;
                     $resultat = mysqli_query($conn, $sql);
                     if ($resultat) {
-                        if (mysqli_num_rows($resultat) == 0) {
-                            echo 'bonjour';
+                        if (mysqli_num_rows($resultat) == 1) {
+                        $sql = "UPDATE prix_special SET id_chalet='" . $_GET['id_chalet'] . "', id_semaine='" . $id_semaine . "', prix_modifie='" . $_GET['prix_modifie'] . "' where id_chalet='" . $_GET['id_chalet'] . "'";
+                        $stmt = mysqli_query($conn, $sql);
+                        if ($stmt == FALSE) {
+                            die("<br>Echec d'execution de la requete : " . $sql);
+                        } else {
+                            echo "Enregistrement mis à jour<br><br>";
+                            echo '<a href="./chalet_admin.php?c=default">Retour aux chalets</a>';
                         }
-                    }
-            
-                    
-
-                    /*if (mysqli_num_rows($resultat) == 0) {
-
+                    }else {
                         $sql = "INSERT INTO prix_special (id_chalet, id_semaine, prix_modifie) values ('" . $_GET['id_chalet'] . "','" . $id_semaine . "', '" . $_GET['prix_modifie'] . "' )";
                         $resultat = mysqli_query($conn, $sql);
                         if ($resultat == FALSE) {
@@ -58,16 +56,12 @@
                             echo "Enregistrement mis à jour<br><br>";
                             echo '<a href="./chalet_admin.php?c=default">Retour aux chalets</a>';
                         }
-                    } else {
-                        $sql = "UPDATE prix_chalet SET id_chalet='" . $_GET['id_chalet'] . "', id_semaine='" . $id_semaine . "', prix_modifie='" . $_GET['prix_modifie'] . "' where id_chalet='" . $_GET['id_chalet'] . "'";
-                        $stmt = mysqli_query($conn, $sql);
-                        if ($stmt == FALSE) {
-                            die("<br>Echec d'execution de la requete : " . $sql);
-                        } else {
-                            echo "Enregistrement mis à jour<br><br>";
-                            echo '<a href="./chalet_admin.php?c=default">Retour aux chalets</a>';
-                        }
-                    }*/
+
+                     }
+            
+                    }
+
+
                 } else { /// si c'est pas un samedi alors redirect
                     echo "tu n'as pris un samedi";
                     echo "<a href=./modif_chalet_semaine.php?c=default&id_chalet=" . $_GET['id_chalet'] . ">retour à la modif</a>";
