@@ -124,5 +124,7 @@
         ?>
 
 </body>
-
+<?php
+include("./footer.html");
+?>
 </html>
