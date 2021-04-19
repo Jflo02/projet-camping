@@ -82,7 +82,7 @@
             break;
         
         case 'update':
-            echo $_GET['id_chalet'];
+    
 
             $sql = "UPDATE chalet SET id_type_chalet='" . $_GET['id_type_chalet'] . "' where id_chalet='" . $_GET['id_chalet']."'";
     
