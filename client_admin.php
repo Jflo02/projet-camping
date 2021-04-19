@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
-    <meta charset="utf-8" />
-    <title>Circuits</title>
-    <link rel="stylesheet" href="styles.css" />
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client admin</title>
+    <link rel="stylesheet" href="index.css" />
 </head>
 
 <body>
 
     <?php
+    include('./session.php');
     include("./en-tete.php");
     //ici on se connecte a la base sql
     include("../connexion.php");
+    include("./menu.php");
+
 
     switch ($_GET['c']) {
 
@@ -146,12 +152,12 @@
                 die("<br>Echec d'execution de la requete : " . $sql);
             } else {
 
-                ?>
+            ?>
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col align-self-center">
-                <p>Liste des clients</p>
-                <p><br><a href='./client_admin.php?c=create'>Ajouter</a></p>
+                            <p>Liste des clients</p>
+                            <p><br><a href='./client_admin.php?c=create'>Ajouter</a></p>
 
                             <table class="table table-striped">
                                 <tr>
@@ -201,5 +207,8 @@
 
 
 </body>
+<?php
+include("./footer.html");
+?>
 
 </html>

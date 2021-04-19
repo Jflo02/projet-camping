@@ -2,19 +2,24 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <meta charset="utf-8" />
     <title>Circuits</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="index.css" />
 
 </head>
 
 <body>
 
-    <?php 
+    <?php
+    include('./session.php');
     include("./en-tete.php");
-    //ici on se connecte a la base sql
+    include("./menu.php");
     include("../connexion.php");
-    
+
+
+
 
 
     ?>
@@ -40,7 +45,8 @@
                 break;
 
             default:
-                echo '<a href="./Histo_resa.php">Voir mes réservations</a>';
+            echo '<a href="./reservations.php" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Voir mes réservations</a>';
+                
                 echo "<br><br>";
                 $sql = "SELECT * FROM client WHERE id_client=" . $_SESSION['id_user'];
                 $stmt = mysqli_query($conn, $sql);
@@ -101,5 +107,8 @@
     </div>
     <!--On ferme le div du corps -->
 </body>
+<?php
+include("./footer.html");
+?>
 
 </html>
