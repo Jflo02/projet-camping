@@ -11,9 +11,12 @@
 <body>
 
     <?php
+    include('./session.php');
     include("./en-tete.php");
     //ici on se connecte a la base sql
     include("../connexion.php");
+    include("./menu.php");
+
 
     switch ($_GET['c']) {
 
@@ -146,12 +149,12 @@
                 die("<br>Echec d'execution de la requete : " . $sql);
             } else {
 
-                ?>
+            ?>
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col align-self-center">
-                <p>Liste des clients</p>
-                <p><br><a href='./client_admin.php?c=create'>Ajouter</a></p>
+                            <p>Liste des clients</p>
+                            <p><br><a href='./client_admin.php?c=create'>Ajouter</a></p>
 
                             <table class="table table-striped">
                                 <tr>

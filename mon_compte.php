@@ -10,11 +10,14 @@
 
 <body>
 
-    <?php 
+    <?php
+    include('./session.php');
     include("./en-tete.php");
     //ici on se connecte a la base sql
     include("../connexion.php");
-    
+    include("./menu.php");
+
+
 
 
     ?>
