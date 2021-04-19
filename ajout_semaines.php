@@ -40,7 +40,7 @@
             
             }
 
-            }
+    }
         
         //on ajoute les semaines a ajouter une par une
         if(isset($semaine_a_ajouter)){
@@ -71,6 +71,7 @@
 
     <?php 
     include("./en-tete.php");
+    include("./menu.php");
     
     
 
@@ -127,3 +128,9 @@
     
     
     ?>
+    </body>
+<?php
+include("./footer.html");
+?>
+
+</html>
