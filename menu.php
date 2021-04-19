@@ -32,7 +32,7 @@
                   <li><a href="#">Réservations</a></li>
                   <li><a href="./chalet_admin.php?c=defaut">Chalets</a></li>
                   <li><a href="saisons.php?c=default">Saisons</a></li>
-                  <li><a href="#">Semaines</a></li>
+                  <li><a href="./semaine_admin.php">Semaines</a></li>
                   <li><a href="./type_chalet.php?c=defaut">Types</a></li>
 
 

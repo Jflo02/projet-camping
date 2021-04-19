@@ -45,7 +45,8 @@
                 break;
 
             default:
-                echo '<a href="./Histo_resa.php">Voir mes réservations</a>';
+            echo '<a href="./reservations.php" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Voir mes réservations</a>';
+                
                 echo "<br><br>";
                 $sql = "SELECT * FROM client WHERE id_client=" . $_SESSION['id_user'];
                 $stmt = mysqli_query($conn, $sql);
