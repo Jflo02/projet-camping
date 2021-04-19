@@ -9,7 +9,7 @@
 
       <div class="nav-collapse">
         <ul class="nav">
-          <li><a href="./index.php">Acceuil</a></li>
+          <li><a href="./index.php">Accueil</a></li>
           <li><a href="#">Activités</a></li>
 
           
@@ -31,7 +31,7 @@
                   <li><a href="./client_admin.php?c=defaut">Clients</a></li>
                   <li><a href="#">Réservations</a></li>
                   <li><a href="./chalet_admin.php?c=defaut">Chalets</a></li>
-                  <li><a href="#">Saisons</a></li>
+                  <li><a href="saisons.php?c=default">Saisons</a></li>
                   <li><a href="#">Semaines</a></li>
                   <li><a href="./type_chalet.php?c=defaut">Types</a></li>
 
