@@ -124,8 +124,8 @@ if (isset($_POST['mdp_user'])) {
                         <label for="password">Mot de passe :</label>
                         <input type="password" id="mdp_user" name="mdp_user"><br><br>
                         <input type="submit" value="Envoyer">
-
                     </form>
+                    
 
                 <?php
                 }
