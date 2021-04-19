@@ -55,14 +55,14 @@
 
 
 
-    <div class="container " style="border: 1px solid black" id="chalet_mini">
+    <div class="container align-self-center " style="border: 1px solid black" id="chalet_mini">
         <div class="row">
-            <div class="col-4 align-self-start">
+            <div class="col-4 ">
                 <img src="./photos/bungalow_mini.jpg" alt="Bungalow 4 personnes" width="100%">
             </div>
-            <div class="col-4 center-block text-center">
-                <h4 class="text-center bolder-weight-text">Bungalow mini pouvant accueillir jusqu'à 4 personnes</h4>
-                <ul class="text-left bolder-weight-text">
+            <div class="col-4 ">
+                <h4 class="text-center ">Bungalow mini pouvant accueillir jusqu'à 4 personnes</h4>
+                <ul class="text-left ">
                     <?php
                     echo '<li>' . $prix_mini_chalet . '€ en basse saison </li>';
                     echo '<li>300€ en moyenne saison </li>';
@@ -70,9 +70,9 @@
                     ?>
                 </ul>
             </div>
-            <div class="col-4 right-block text-center">
+            <div class="col-4 text-center">
                 <h5>Descriptif:</h5>
-                <ul class="text-left bolder-weight-text">
+                <ul class="text-left">
                     <li>Superficie : 25 m²</li>
                     <li>Cuisine avec micro-ondes</li>
                     <li>Télévision</li>
@@ -92,8 +92,8 @@
                 <img src="./photos/bungalow_grand.jpg" alt="Bungalow 6 personnes" width="100%">
             </div>
             <div class="col-4 center-block text-center">
-                <h4 class="text-center bolder-weight-text">Bungalow grand pouvant accueillir jusqu'à 6 personnes</h4>
-                <ul class="text-left bolder-weight-text">
+                <h4 class="text-center">Bungalow grand pouvant accueillir jusqu'à 6 personnes</h4>
+                <ul class="text-left">
                     <?php
                     echo '<li>' . $prix_grand_chalet . '€ en basse saison </li>';
                     echo '<li>600€ en moyenne saison </li>';
@@ -103,7 +103,7 @@
             </div>
             <div class="col-4 right-block text-center">
                 <h5>Descriptif:</h5>
-                <ul class="text-left bolder-weight-text">
+                <ul class="text-left">
                     <li>Superficie : 33 m²</li>
                     <li>Cuisine avec micro-ondes</li>
                     <li>Télévision</li>
@@ -122,8 +122,8 @@
                 <img src="./photos/bungalow_grand_luxe.jpg" alt="Bungalow 6 personnes grand luxe" width="100%">
             </div>
             <div class="col-4 center-block text-center">
-                <h4 class="text-center bolder-weight-text">Bungalow grand luxe pouvant accueillir jusqu'à 6 personnes</h4>
-                <ul class="text-left bolder-weight-text">
+                <h4 class="text-center">Bungalow grand luxe pouvant accueillir jusqu'à 6 personnes</h4>
+                <ul class="text-left">
                     <?php
                     echo '<li>' . $prix_grand_luxe_chalet . '€ en basse saison </li>';
                     echo '<li>900€ en moyenne saison </li>';
@@ -133,7 +133,7 @@
             </div>
             <div class="col-4 right-block text-center">
                 <h5>Descriptif:</h5>
-                <ul class="text-left bolder-weight-text">
+                <ul class="text-left">
                     <li>Superficie : 42 m²</li>
                     <li>Cuisine avec four et micro-ondes</li>
                     <li>Télévision</li>
@@ -146,10 +146,10 @@
         </div>
     </div>
 
-    <?php
-    include("./footer.html")
-    ?>
+    
 
 </body>
-
+<?php
+    include("./footer.html")
+    ?>
 </html>

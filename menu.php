@@ -10,7 +10,7 @@
       <div class="nav-collapse">
         <ul class="nav">
           <li><a href="./index.php">Accueil</a></li>
-          <li><a href="#">Activités</a></li>
+          <li><a href="./activites.php">Activités</a></li>
 
           
           <?php
@@ -29,9 +29,9 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration</a>
                 <ul class="dropdown-menu">
                   <li><a href="./client_admin.php?c=defaut">Clients</a></li>
-                  <li><a href="#">Réservations</a></li>
+                  <li><a href="./reservations_admin.php?c=defaut">Réservations</a></li>
                   <li><a href="./chalet_admin.php?c=defaut">Chalets</a></li>
-                  <li><a href="saisons.php?c=default">Saisons</a></li>
+                  <li><a href="./saisons.php?c=default">Saisons</a></li>
                   <li><a href="./semaine_admin.php">Semaines</a></li>
                   <li><a href="./type_chalet.php?c=defaut">Types</a></li>
 
