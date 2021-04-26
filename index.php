@@ -20,6 +20,7 @@
     ?>
     <div class="container">
             <p class="jumbotron"><a href="./chalet.php">Voir nos chalets</a></p>
+            <p class="jumbotron"><a href="./promo.php">Voir nos chalets en promo !</a></p>
     </div>
 
 
