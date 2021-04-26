@@ -77,7 +77,7 @@
 
     <div class="container align-self-center " style="border: 1px solid black" id="chalet_mini">
         <div class="row">
-            <div class="col-4 ">
+            <div class="col-4 align-self-center">
                 <img src="./photos/bungalow_mini.jpg" alt="Bungalow 4 personnes" width="100%">
             </div>
             <div class="col-4 ">
@@ -110,7 +110,7 @@
 
     <div class="container" style="border: 1px solid black" id="chalet_grand">
         <div class="row">
-            <div class="col-4 align-self-start">
+            <div class="col-4 align-self-center">
                 <img src="./photos/bungalow_grand.jpg" alt="Bungalow 6 personnes" width="100%">
             </div>
             <div class="col-4 center-block text-center">
@@ -142,7 +142,7 @@
 
     <div class="container" style="border: 1px solid black" id="chalet_grand_luxe">
         <div class="row">
-            <div class="col-4 align-self-start">
+            <div class="col-4 align-self-center">
                 <img src="./photos/bungalow_grand_luxe.jpg" alt="Bungalow 6 personnes grand luxe" width="100%">
             </div>
             <div class="col-4 center-block text-center">
