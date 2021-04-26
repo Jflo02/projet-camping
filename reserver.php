@@ -66,8 +66,6 @@ if(!isset($_GET['c'])){
                     $date->sub(new DateInterval('P1D'));
                     echo "Les réservation se font du samedi au samedi, nous avons donc selectionné le samedi d'avant.";
                 }
-                $strdate = $date->format('d-m-Y');
-                echo "<br><br> La réservation commencera le : " . $strdate . "<br><br>";
 
                 //On check si la semaine est dans la base
                 $sql = "SELECT * FROM semaine";
@@ -79,21 +77,64 @@ if(!isset($_GET['c'])){
                 while ($row = mysqli_fetch_assoc($resultat)) {
                     $array[]=$row['date_debut'];
                 }
-                $date_string = $date-> format ('Y-m-d');
-                //On vérifie si la semaine est dans le tableau, si non, nous arretons le processus
-                if (!in_array($date_string, $array)){
-                    echo "Cette semaine n'est pas une semaine ou nous recevons des vacanciers, nous vous invitons à en choisir une autre ! <br>";
-                    echo "<a href=./reserver.php?cat=1>Retour</a>";
-                    die;
+                //On crée un tableau string des dates dans le format américain : $array_date_str et fr : $array_date_str_clean
+                for($i=0; $i< $_GET['nbr_semaine']; $i++){
+                    $strdate = $date->format('Y-m-d');
+                    $array_date_str[] = $strdate;
+                    $strdate_clean = $date->format('d-m-Y');
+                    $array_date_str_clean[] = $strdate_clean;
+                    $date->add(new DateInterval('P7D'));
                 }
-                //On vérifie le nombre de semaine
-                //On vérifie la dispo
-                //On vérifie prix spé
-                //On confirme le prix, les semaines et le chalet
-                //On enregistre la résa
+                //On vérifie que chaque semaine soit dans le tableau, si non, nous arretons le processus
+                $i = 0;
+                foreach($array_date_str as $date_resa){
+                    if (!in_array($date_resa, $array)){
+                        echo "La semaine du ". $array_date_str_clean[$i] ." n'est pas une semaine ou nous recevons des vacanciers, nous vous invitons à en choisir une autre ! <br>";
+                        echo "<a href=./reserver.php?cat=1>Retour</a>";
+                        die;
+                    }
+                    $i = $i + 1 ;
+                }
                 
-                    
 
+                //On vérifie qu'un chalet est dispo a ces dates
+
+                // On regarde combien de chalet de la catégorie il y a en tout
+                $sql = 'select count(id_type_chalet) as nbr_chalet_total from chalet where id_type_chalet =' . $_GET['cat'];
+                $resultat = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_assoc($resultat);
+                $nbr_chalet_total = $row['nbr_chalet_total'];
+
+                // On regarde combien sont réservés pour les dates, on soustrait, si <1, on annule
+                $i = 0 ;
+                foreach($array_date_str as $datedate){
+                    $sql="Select count(reservation.id_chalet) as nbr_chalet_resa from reservation inner join semaine on reservation.id_semaine = semaine.id_semaine inner join chalet on reservation.id_chalet = chalet.id_chalet where id_type_chalet =". $_GET['cat'] . " and date_debut = '". $datedate ."'";
+                    $resultat = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($resultat);
+                    $nbr_chalet_resa = $row['nbr_chalet_resa'];
+                    $nbr_chalet_restant = $nbr_chalet_total - $nbr_chalet_resa ;
+                    if ($nbr_chalet_restant < 1){
+                        echo "<br><br>Nous sommes désolés, nous n'avons plus de chalet de cette catégorie disponible pour la semaine du : " . $array_date_str_clean[$i];
+                        echo "<br> Nous vous invitons à changer votre réservation "; 
+                        echo "<br><a href=./reserver.php?cat=1>Retour</a>";
+                        die;
+                    }
+                    $i = $i + 1 ;
+                }
+                //On vérifie prix spé
+                // sql :
+                //Select *
+                //from prix_special inner join semaine on prix_special.id_semaine = semaine.id_semaine inner join chalet on prix_special.id_chalet = chalet.id_chalet
+                //where id_type_chalet = 1 and date_debut = '2021.04.10'
+                
+                //On recapitule la résa prix, les semaines et le chalet
+                echo "<br><br> La réservation commencera le : " . $array_date_str_clean[0] . " pour une durée de ". $_GET['nbr_semaine']." semaines<br><br>";
+                
+                //On enregistre la résa
+                // Trouver un chalet dispo, du type voulu sur toutes les semaines, de pref le même
+                //elle va etre rigolote a faire cette requete
+
+                //C EST DE LA MERDEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
                        
                 break;
             
