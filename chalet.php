@@ -101,7 +101,7 @@
                     <li>WC</li>
                     <li>Barbecue extérieur</li>
                     <br>
-                    <a href="./reserver.php?cat=mini" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Reserver</a>
+                    <a href="./reserver.php?cat=1" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Reserver</a>
                 </ul>
             </div>
         </div>
@@ -134,7 +134,7 @@
                     <li>WC</li>
                     <li>Barbecue extérieur</li>
                     <br>
-                    <a href="./reserver.php?cat=grand" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Reserver</a>
+                    <a href="./reserver.php?cat=2" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Reserver</a>
                 </ul>
             </div>
         </div>
@@ -166,7 +166,7 @@
                     <li>WC : 2</li>
                     <li>Barbecue extérieur</li>
                     <br>
-                    <a href="./reserver.php?cat=luxe" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Reserver</a>
+                    <a href="./reserver.php?cat=3" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Reserver</a>
                 </ul>
             </div>
         </div>

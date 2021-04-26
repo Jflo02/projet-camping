@@ -63,10 +63,9 @@
                 <form action="./semaine_admin.php" method="get">
                     <label for="Saison"> Saison :</label>
                     <SELECT name="saison">
-                        <OPTION value="1">Basse
-                        <OPTION value="2">Moyenne
-                        <OPTION value="3">Haute
-                    </SELECT>
+                        <OPTION value="1" <?php if($_GET['saison']==1){echo "selected";} ?> >Basse
+                        <OPTION value="2" <?php if($_GET['saison']==2){echo "selected";} ?> >Moyenne
+                        <OPTION value="3" <?php if($_GET['saison']==3){echo "selected";} ?> >Haute
                     <input type="hidden" name="id_semaine" value="<?php echo $row['id_semaine'] ?>">
                     <input type="hidden" name="c" value="update">
                     <input type="submit" value="Valider">
@@ -168,7 +167,7 @@
                                             echo "<td>" . $row['type'] . "</td>";
                                             echo "<td>" . $row['taux'] . "</td>";
 
-                                            echo "<td><a href=./semaine_admin.php?c=read&id_semaine=" . $row['id_semaine'] . ">éditer</a></td>";
+                                            echo "<td><a href=./semaine_admin.php?c=read&id_semaine=" . $row['id_semaine']. '&saison='. $row['id_saison'] . ">éditer</a></td>";
                                     }
                                         echo "</tr>";
                                 

@@ -75,6 +75,7 @@
                                     <th>Id Chalet</th>
                                     <th>Semaine</th>
                                     <th>Statut</th>
+                                    <th>Prix</th>
                                     <th></th>
                                 </tr>
                             <?php
@@ -101,6 +102,7 @@
                                 } elseif ($validation == FALSE) {
                                     echo '<td>' . 'Invalide, contacter le camping pour plus de renseignements' . '</td>';
                                 }
+                                echo "<td>" . $row['prix'] ."</td>";
                                 //fin de la validité
                                 echo "<td><a href=./reservations_admin?c=read&id_client=" . $row['id_chalet'] . ">éditer(NE MARCHE PAS/A CODER)</a></td>";
                             }
