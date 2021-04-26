@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chalet</title>
+    <title>Reserver</title>
     <link rel="stylesheet" href="chalet.css" />
 </head>
 
@@ -54,10 +54,27 @@
     //on va ragarder si des chalets ont des prix spéciaux
     $sql = 'SELECT * FROM prix_special';
     $resultat = mysqli_query($conn, $sql);
-    while ($row = mysqli_fetch_array($stmt)) {
-        
+    while ($row = mysqli_fetch_array($resultat)) {
+    }
+    //coef moyenne saison
+    $sql = 'SELECT * FROM saison WHERE type="moyenne"';
+    $resultat = mysqli_query($conn, $sql);
+    if ($resultat) {
+        if (mysqli_num_rows($resultat) == 1) {
+            $row = mysqli_fetch_array($resultat);
+            $coef_moyenne = $row['taux'];
+        }
     }
 
+    //coef haute saison
+    $sql = 'SELECT * FROM saison WHERE type="haute"';
+    $resultat = mysqli_query($conn, $sql);
+    if ($resultat) {
+        if (mysqli_num_rows($resultat) == 1) {
+            $row = mysqli_fetch_array($resultat);
+            $coef_haute = $row['taux'];
+        }
+    }
 
     ?>
 
@@ -72,9 +89,58 @@
                 <h4 class="text-center ">Bungalow mini pouvant accueillir jusqu'à 4 personnes</h4>
                 <ul class="text-left ">
                     <?php
-                    echo '<li>' . $prix_mini_chalet . '€ en basse saison </li>';
-                    echo '<li>300€ en moyenne saison </li>';
-                    echo '<li>400€ en haute saison</li>';
+                    //prix special pr chalet mini basse saison
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 1 AND `semaine`.`id_saison`=1';
+                    $resultat = mysqli_query($conn, $sql);
+                    if ($resultat) {
+                        if (mysqli_num_rows($resultat) == 1) {
+                            $row = mysqli_fetch_array($resultat);
+                            $prix_min = $row['MIN(prix_modifie)'];
+                            if ($prix_min == NULL) {
+                                echo '<li>' . ($prix_mini_chalet * 1) . '€ en basse saison </li>';
+                            } else {
+                                echo '<s><li>' . ($prix_mini_chalet * 1) . '€ en basse saison </li></s>';
+
+                                echo '<div class="text-danger"><b>A partir de ' . $prix_min . '€ ! </b></div>';
+                            }
+                        }
+                    }
+
+                    //prix special pr chalet mini moyenne saison
+
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 1 AND `semaine`.`id_saison`=2';
+                    $resultat = mysqli_query($conn, $sql);
+                    if ($resultat) {
+                        if (mysqli_num_rows($resultat) == 1) {
+                            $row = mysqli_fetch_array($resultat);
+                            $prix_min = $row['MIN(prix_modifie)'];
+                            if ($prix_min == NULL) {
+                                echo '<li>' . ($prix_mini_chalet * $coef_moyenne) . '€ en moyenne saison </li>';
+                            } else {
+                                echo '<s><li>' . ($prix_mini_chalet * $coef_moyenne) . '€ en moyenne saison </li></s>';
+
+                                echo '<div class="text-danger"><b>A partir de ' . $prix_min . '€ ! </b></div>';
+                            }
+                        }
+                    }
+
+                    //prix special pr chalet mini en haute saison
+
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 1 AND `semaine`.`id_saison`=3';
+                    $resultat = mysqli_query($conn, $sql);
+                    if ($resultat) {
+                        if (mysqli_num_rows($resultat) == 1) {
+                            $row = mysqli_fetch_array($resultat);
+                            $prix_min = $row['MIN(prix_modifie)'];
+                            if ($prix_min == NULL) {
+                                echo '<li>' . ($prix_mini_chalet * $coef_haute) . '€ en haute saison </li>';
+                            } else {
+                                echo '<s><li>' . ($prix_mini_chalet * $coef_haute) . '€ en haute saison </li></s>';
+
+                                echo '<div class="text-danger"><b>A partir de ' . $prix_min . '€ ! </b></div>';
+                            }
+                        }
+                    }
                     ?>
                 </ul>
             </div>
@@ -105,9 +171,60 @@
                 <h4 class="text-center">Bungalow grand pouvant accueillir jusqu'à 6 personnes</h4>
                 <ul class="text-left">
                     <?php
-                    echo '<li>' . $prix_grand_chalet . '€ en basse saison </li>';
-                    echo '<li>600€ en moyenne saison </li>';
-                    echo '<li>800€ en haute saison</li>';
+
+                    //prix special pr chalet grand luxe basse saison
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 2 AND `semaine`.`id_saison`=1';
+                    $resultat = mysqli_query($conn, $sql);
+                    if ($resultat) {
+                        if (mysqli_num_rows($resultat) == 1) {
+                            $row = mysqli_fetch_array($resultat);
+                            $prix_min = $row['MIN(prix_modifie)'];
+                            if ($prix_min == NULL) {
+                                echo '<li>' . ($prix_grand_chalet * 1) . '€ en basse saison </li>';
+                            } else {
+                                echo '<s><li>' . ($prix_grand_chalet * 1) . '€ en basse saison </li></s>';
+
+                                echo '<div class="text-danger"><b>A partir de ' . $prix_min . '€ ! </b></div>';
+                            }
+                        }
+                    }
+
+                    //prix special pr chalet grand luxe moyenne saison
+
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 2 AND `semaine`.`id_saison`=2';
+                    $resultat = mysqli_query($conn, $sql);
+                    if ($resultat) {
+                        if (mysqli_num_rows($resultat) == 1) {
+                            $row = mysqli_fetch_array($resultat);
+                            $prix_min = $row['MIN(prix_modifie)'];
+                            if ($prix_min == NULL) {
+                                echo '<li>' . ($prix_grand_chalet * $coef_moyenne) . '€ en moyenne saison </li>';
+                            } else {
+                                echo '<s><li>' . ($prix_grand_chalet * $coef_moyenne) . '€ en moyenne saison </li></s>';
+
+                                echo '<div class="text-danger"><b>A partir de ' . $prix_min . '€ ! </b></div>';
+                            }
+                        }
+                    }
+
+                    //prix special pr chalet grand luxe en haute saison
+
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 2 AND `semaine`.`id_saison`=3';
+                    $resultat = mysqli_query($conn, $sql);
+                    if ($resultat) {
+                        if (mysqli_num_rows($resultat) == 1) {
+                            $row = mysqli_fetch_array($resultat);
+                            $prix_min = $row['MIN(prix_modifie)'];
+                            if ($prix_min == NULL) {
+                                echo '<li>' . ($prix_grand_chalet * $coef_haute) . '€ en haute saison </li>';
+                            } else {
+                                echo '<s><li>' . ($prix_grand_chalet * $coef_haute) . '€ en haute saison </li></s>';
+
+                                echo '<div class="text-danger"><b>A partir de ' . $prix_min . '€ ! </b></div>';
+                            }
+                        }
+                    }
+
                     ?>
                 </ul>
             </div>
@@ -137,9 +254,61 @@
                 <h4 class="text-center">Bungalow grand luxe pouvant accueillir jusqu'à 6 personnes</h4>
                 <ul class="text-left">
                     <?php
-                    echo '<li>' . $prix_grand_luxe_chalet . '€ en basse saison </li>';
-                    echo '<li>900€ en moyenne saison </li>';
-                    echo '<li>1200€ en haute saison</li>';
+
+                    //prix special pr chalet grand luxe basse saison
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 3 AND `semaine`.`id_saison`=1';
+                    $resultat = mysqli_query($conn, $sql);
+                    if ($resultat) {
+                        if (mysqli_num_rows($resultat) == 1) {
+                            $row = mysqli_fetch_array($resultat);
+                            $prix_min = $row['MIN(prix_modifie)'];
+                            if ($prix_min == NULL) {
+                                echo '<li>' . ($prix_grand_luxe_chalet * 1) . '€ en basse saison </li>';
+                            } else {
+                                echo '<s><li>' . ($prix_grand_luxe_chalet * 1) . '€ en basse saison </li></s>';
+
+                                echo '<div class="text-danger"><b>A partir de ' . $prix_min . '€ ! </b></div>';
+                            }
+                        }
+                    }
+
+                    //prix special pr chalet grand luxe moyenne saison
+
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 3 AND `semaine`.`id_saison`=2';
+                    $resultat = mysqli_query($conn, $sql);
+                    if ($resultat) {
+                        if (mysqli_num_rows($resultat) == 1) {
+                            $row = mysqli_fetch_array($resultat);
+                            $prix_min = $row['MIN(prix_modifie)'];
+                            if ($prix_min == NULL) {
+                                echo '<li>' . ($prix_grand_luxe_chalet * $coef_moyenne) . '€ en moyenne saison </li>';
+                            } else {
+                                echo '<s><li>' . ($prix_grand_luxe_chalet * $coef_moyenne) . '€ en moyenne saison </li></s>';
+
+                                echo '<div class="text-danger"><b>A partir de ' . $prix_min . '€ ! </b></div>';
+                            }
+                        }
+                    }
+
+                    //prix special pr chalet grand luxe en haute saison
+
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 3 AND `semaine`.`id_saison`=3';
+                    $resultat = mysqli_query($conn, $sql);
+                    if ($resultat) {
+                        if (mysqli_num_rows($resultat) == 1) {
+                            $row = mysqli_fetch_array($resultat);
+                            $prix_min = $row['MIN(prix_modifie)'];
+                            if ($prix_min == NULL) {
+                                echo '<li>' . ($prix_grand_luxe_chalet * $coef_haute) . '€ en haute saison </li>';
+                            } else {
+                                echo '<s><li>' . ($prix_grand_luxe_chalet * $coef_haute) . '€ en haute saison </li></s>';
+
+                                echo '<div class="text-danger"><b>A partir de ' . $prix_min . '€ ! </b></div>';
+                            }
+                        }
+                    }
+
+
                     ?>
                 </ul>
             </div>
@@ -160,10 +329,11 @@
         </div>
     </div>
 
-    
+
 
 </body>
 <?php
-    include("./footer.html")
-    ?>
+include("./footer.html")
+?>
+
 </html>

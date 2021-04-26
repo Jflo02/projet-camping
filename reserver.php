@@ -7,12 +7,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chalet</title>
+    <title>Reserver</title>
     <link rel="stylesheet" href="chalet.css" />
 </head>
 
-<body>
-    <?php
+<bo <?php
     //test après les bug
     include("../connexion.php");
     include("./session.php");
@@ -51,6 +50,12 @@
         }
     }
 
+    //on va ragarder si des chalets ont des prix spéciaux
+    $sql = 'SELECT * FROM prix_special';
+    $resultat = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_array($resultat)) {
+    }
+
     //coef moyenne saison
     $sql = 'SELECT * FROM saison WHERE type="moyenne"';
     $resultat = mysqli_query($conn, $sql);
@@ -71,40 +76,36 @@
         }
     }
 
-    ?>
-
-
-
-    <div class="container align-self-center " style="border: 1px solid black" id="chalet_mini">
-        <div class="row">
-            <div class="col-4 ">
-                <img src="./photos/bungalow_mini.jpg" alt="Bungalow 4 personnes" width="100%">
-            </div>
-            <div class="col-4 ">
-                <h4 class="text-center ">Bungalow mini pouvant accueillir jusqu'à 4 personnes</h4>
-                <ul class="text-left ">
-                    <?php
-                    echo '<li>' . ($prix_mini_chalet * 1) . '€ en basse saison </li>';
-                    echo '<li>' . ($prix_mini_chalet * $coef_moyenne) . '€ en moyenne saison </li>';
-                    echo '<li>' . ($prix_mini_chalet * $coef_haute) . '€ en haute saison</li>';
-                    ?>
-                </ul>
-            </div>
-            <div class="col-4 text-center">
-                <h5>Descriptif:</h5>
-                <ul class="text-left">
-                    <li>Superficie : 25 m²</li>
-                    <li>Cuisine avec micro-ondes</li>
-                    <li>Télévision</li>
-                    <li>chambres : 2</li>
-                    <li>Salle de bain</li>
-                    <li>WC</li>
-                    <li>Barbecue extérieur</li>
-                    <br>
-                    <a href="./reserver.php?cat=mini" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Reserver</a>
-                </ul>
-            </div>
+    ?> <div class="container align-self-center " style="border: 1px solid black" id="chalet_mini">
+    <div class="row">
+        <div class="col-4 ">
+            <img src="./photos/bungalow_mini.jpg" alt="Bungalow 4 personnes" width="100%">
         </div>
+        <div class="col-4 ">
+            <h4 class="text-center ">Bungalow mini pouvant accueillir jusqu'à 4 personnes</h4>
+            <ul class="text-left ">
+                <?php
+                echo '<li>' . ($prix_mini_chalet * 1) . '€ en basse saison </li>';
+                echo '<li>' . ($prix_mini_chalet * $coef_moyenne) . '€ en moyenne saison </li>';
+                echo '<li>' . ($prix_mini_chalet * $coef_haute) . '€ en haute saison</li>';
+                ?>
+            </ul>
+        </div>
+        <div class="col-4 text-center">
+            <h5>Descriptif:</h5>
+            <ul class="text-left">
+                <li>Superficie : 25 m²</li>
+                <li>Cuisine avec micro-ondes</li>
+                <li>Télévision</li>
+                <li>chambres : 2</li>
+                <li>Salle de bain</li>
+                <li>WC</li>
+                <li>Barbecue extérieur</li>
+            </ul>
+            <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">réserver</a>
+
+        </div>
+    </div>
     </div>
 
 
@@ -133,9 +134,9 @@
                     <li>Salle de bain</li>
                     <li>WC</li>
                     <li>Barbecue extérieur</li>
-                    <br>
-                    <a href="./reserver.php?cat=grand" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Reserver</a>
                 </ul>
+                <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">réserver</a>
+
             </div>
         </div>
     </div>
@@ -165,17 +166,18 @@
                     <li>Salles de bain : 2</li>
                     <li>WC : 2</li>
                     <li>Barbecue extérieur</li>
-                    <br>
-                    <a href="./reserver.php?cat=luxe" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Reserver</a>
                 </ul>
+                <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">réserver</a>
+
             </div>
         </div>
     </div>
 
-    
 
-</body>
-<?php
+
+    </body>
+    <?php
     include("./footer.html")
     ?>
+
 </html>
