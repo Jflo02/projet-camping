@@ -43,7 +43,37 @@ if(!isset($_GET['c'])){
     <?php
         switch ($_GET['c']) {
 
+            case 'resa':
+                foreach(range(0, $_GET['nbr_semaine'] - 1) as $value){
+                    $prix = "prix".$value;
+                    $semaine = "semaine".$value;
+                    $sql="Select * From semaine WHERE date_debut = '". $_GET[$semaine] ."'";
+                    $resultat = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($resultat);
+                    $id_semaine = $row['id_semaine'];
+                    $chalet = "chalet".$value;
+                    $today = date('Y-m-d');
+                    $sql = "INSERT INTO reservation
+                            VALUES (". $_SESSION['id_user'] .",". $_GET[$chalet] .",". $id_semaine .",TRUE,'". $today ."',". $_GET[$prix] .")";
+                    $resultat = mysqli_query($conn, $sql);
+                }
+                if ($resultat == FALSE) {
+                    die("<br>Echec d'execution de la requete : " . $sql);
+                }else{
+                   echo "Votre validation a été prise en charge.";
+                   echo "<br><a href=./index.php>Retour a l'accueil</a>";
+                   echo "<br><a href=./reservations.php>Voir vos reservations</a>";
+                }
+                break;
+
             case 'check':
+
+                ?>
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col align-self-center">
+                            <table class="table table-striped">
+                <?php
                 //On converti la date au samedi d'avant
                 $date = new DateTime ($_GET['date']);
                 $jour = $date -> format ('D');
@@ -121,29 +151,164 @@ if(!isset($_GET['c'])){
                     }
                     $i = $i + 1 ;
                 }
-                //On vérifie prix spé
-                // sql :
-                //Select *
-                //from prix_special inner join semaine on prix_special.id_semaine = semaine.id_semaine inner join chalet on prix_special.id_chalet = chalet.id_chalet
-                //where id_type_chalet = 1 and date_debut = '2021.04.10'
+                //On recapitule la date de la résa et le nombre de semaine
+                echo "<br> La réservation commencera le : " . $array_date_str_clean[0] . " pour une durée de ". $_GET['nbr_semaine']." semaines.<br><br>";
+                //On vérifie prix spé           
+                Foreach($array_date_str as $date_str){
+                    $sql="Select *
+                    from prix_special inner join semaine on prix_special.id_semaine = semaine.id_semaine inner join chalet on prix_special.id_chalet = chalet.id_chalet
+                    where id_type_chalet =". $_GET['cat'] ." and date_debut = '". $date_str ."'";
+                    $result = mysqli_query($conn, $sql);
+                    //on créer un tableau pour savoir les semaines en promos
+                    if (mysqli_num_rows($result)==0) {
+                        $promo[]=FALSE;
+                    }else{
+                        $promo[]=TRUE;
+                    }
+                }
+                $i=0;
+                //on affiche le prix semaine par semaine et on le rentre dans un tableau :
+                Foreach($promo as $value){
+                    if($value){
+                        $sql="Select *
+                            from prix_special inner join semaine on prix_special.id_semaine = semaine.id_semaine inner join chalet on prix_special.id_chalet = chalet.id_chalet
+                            where id_type_chalet =". $_GET['cat'] ." and date_debut = '". $array_date_str[$i] ."'";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_assoc($result);
+                        $prix_semaine[]=$row['prix_modifie'];
+                        $saison_semaine[]='PROMO';
+                    }else{
+                        //on recupère le multiplicateur de saison
+                        $sql = "Select *
+                                From semaine inner join saison on semaine.id_saison=saison.id_saison
+                                where date_debut = '". $array_date_str[$i] ."'";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_assoc($result);
+                        $saison = $row['type'];
+                        $taux = $row['taux'];
+                        //on récupère le prix de base du chalet
+                        $sql = "SELECT * FROM type_chalet where id_type_chalet =" . $_GET['cat'];
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_assoc($result);
+                        $prix_base = $row['prix_base'];
+                        $prix_final = $prix_base * $taux ;
+                        $prix_semaine[]=$prix_final;
+                        $saison_semaine[]=$saison;
+                    }
+                    $i++;
+                }
+                //On calcul le prix total de la résa
+                $prix_total = 0 ;
+                foreach($prix_semaine as $value){
+                    $prix_total=$prix_total+$value;
+                }
+
+                //On trouve les ID chalet libre correspondant à la demande
+                foreach($array_date_str as $datesemaine){
+                    $sql = "Select *
+                    From chalet
+                    where id_type_chalet=". $_GET['cat'] ." and id_chalet not in (Select id_chalet 
+                                                                From reservation inner join semaine on reservation.id_semaine = semaine.id_semaine 
+                                                                where date_debut='". $datesemaine ."')";
+                    $result = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        //on récupère les chalets dispos dans un tableau
+                        $dispo_semaine[]=$row['id_chalet'];
+                    }
+                    //On récupère la liste des ID chalet dispo par semaine dans un tableau de tableau
+                    $chalet[]=$dispo_semaine;
+                    unset($dispo_semaine);                    
+                }
+                //On essaye de trouver un chalet dispo pour toute la résa
+                $liste_chalet_possible=$chalet[0];
+                foreach ($chalet as $listedipo) {
+                    $liste_chalet_possible = array_intersect($liste_chalet_possible, $listedipo);
+                }
+                $firstkey = array_key_first($liste_chalet_possible);
+                //Si aucun chalet n'est dispo sur la semaine, nous placons le client dans le premier chalet de chaque semaine
+                //Si un chalet ou plusieurs chalet sont dispo, nous plaçons le client dans le premier de la liste
+                if (count($liste_chalet_possible)==0){
+                    echo "Nous sommes désolé, aucun chalet n'est disponible pour l'entiereté de votre sejour, vous avez été placé dans différents chalets</br>";
+                    foreach($chalet as $chaletsemaine){
+                        $chalet_choisi[]=$chaletsemaine[0];
+                    }
+                }else{
+                    foreach($chalet as $chaletsemaine){
+                        $chalet_choisi[]=$liste_chalet_possible[$firstkey];
+                    }
+                }
+
                 
-                //On recapitule la résa prix, les semaines et le chalet
-                echo "<br><br> La réservation commencera le : " . $array_date_str_clean[0] . " pour une durée de ". $_GET['nbr_semaine']." semaines<br><br>";
+
+                ?>
+                <thead>
+                    <tr>
+                        <th><b>Récapitulatif de la commande</b></th>
+                    </tr>
+                </thead>
+                    <tr>
+                        <td>Date de début</td>
+                        <td>Numéro du chalet</td>
+                        <td>Saison</td>
+                        <td>Prix</td>
+                    </tr>
+                    <?php
+                    $i=0;
+                    Foreach($prix_semaine as $prixsemaine){
+                        echo "<tr>";
+                        echo "<td>samedi $array_date_str_clean[$i]</td>";
+                        echo "<td>Chalet numéro $chalet_choisi[$i]</td>";
+                        echo "<td>$saison_semaine[$i]</td>";
+                        echo "<td>$prixsemaine</td>";
+                        echo "</tr>";
+                        $i++;
+                    }
+                    echo "<tr>";
+                    echo "<td></td>";
+                    echo "<td></td>";
+                    echo "<td>TOTAL</td>";
+                    echo "<td>$prix_total euros</td>";
+                    echo "</tr>";
+                    echo "</table>";
+
+
+                    //On confirme la commande :
+                    ?>
+                    
+                                <form action="./reserver.php" method="GET">
+                                    <input type="hidden" name="c" value="resa">
+                                    <input type="hidden" name="nbr_semaine" value="<?php echo $_GET['nbr_semaine'];?>">
+                                    <?php 
+                                        $i=0;
+                                        Foreach($prix_semaine as $prixsemaine){
+                                            echo '<input type="hidden" name="semaine'. $i.'" value="'. $array_date_str[$i] .'">';
+                                            echo '<input type="hidden" name="chalet'. $i.'" value="'. $chalet_choisi[$i] .'">';
+                                            echo '<input type="hidden" name="prix'. $i .'" value="'. $prixsemaine .'">'; 
+                                            $i++;                                       
+                                        }
+                                    ?>
+                                    <input type="submit" value="Valider votre commande">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <?php
+
+                
+
                 
                 //On enregistre la résa
-                // Trouver un chalet dispo, du type voulu sur toutes les semaines, de pref le même
-                //elle va etre rigolote a faire cette requete
 
-                //C EST DE LA MERDEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
                        
                 break;
             
             default :
+                $today = date('Y-m-d');
                 ?>
                 <!-- Formulaire pour demander la réservation -->
                 <form action="./reserver.php" method="get">
                     <label for="date">Entrez la date du premier samedi de votre reservation :</label>
-                    <input type="date" id="date" name="date" required><br><br>
+                    <input type="date" id="date" name="date" required min="<?php echo $today?>"><br><br>
                     <label for="nbr_semaine">Combien de semaines ?:</label>
                     <input type="number" id="nbr_semaine" name="nbr_semaine" min=1 required><br><br>
                     <label for="cat">Le type de chalet :</label>
