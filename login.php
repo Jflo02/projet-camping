@@ -21,6 +21,7 @@ if (isset($_POST['mdp_user'])) {
             $_SESSION['id_user'] = $row['id_client'];
             $_SESSION['nom_user'] = $row['nom'];
             $_SESSION['prenom_user'] = $row['prenom'];
+            $_SESSION['mail'] = $row['mail'];
             $_SESSION['type'] = "client";
 
             $url = $_SERVER['HTTP_REFERER'];

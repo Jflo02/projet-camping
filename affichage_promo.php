@@ -20,7 +20,7 @@ include("./menu.php");
         <div class="row align-items-center">
             <div class="col align-self-center">
                 <?php
-                    $sql = 'SELECT * FROM prix_special inner join semaine on prix_special.id_semaine = semaine.id_semaine inner join chalet on prix_special.id_chalet = chalet.id_chalet WHERE id_type_chalet='. $_GET['cat'];
+                    $sql = 'SELECT * FROM prix_special inner join semaine on prix_special.id_semaine = semaine.id_semaine inner join chalet on prix_special.id_chalet = chalet.id_chalet WHERE id_type_chalet='. $_GET['cat']. ' and (semaine.id_semaine, chalet.id_chalet) not in (select id_semaine, id_chalet from reservation)';
                     $resultat = mysqli_query($conn, $sql);
                     if (mysqli_num_rows($resultat)==0) {
                         echo "Il n'y a pas de promotion sur ce type de chalet, vous pouvez réserver normalement : <br><br>";

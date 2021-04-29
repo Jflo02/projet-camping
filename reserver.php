@@ -60,7 +60,10 @@ if(!isset($_GET['c'])){
                 if ($resultat == FALSE) {
                     die("<br>Echec d'execution de la requete : " . $sql);
                 }else{
-                   echo "Votre validation a été prise en charge.";
+                   echo "Votre validation a été prise en charge, un email vous a été envoyé.";
+                   $to = $_SESSION['mail'];
+                   echo "<br><br><div class=\"jumbotron\"> A l'attention de Mr DELCAMBRE, nous avons une erreur car le serveur mail n'est pas configuré. <br></div>";
+                   mail ( $to , "réservation camping du plaisir" , "Bonjour, \n vous avez réservé, des bisous see you soon au camping" );
                    echo "<br><a href=./index.php>Retour a l'accueil</a>";
                    echo "<br><a href=./reservations.php>Voir vos reservations</a>";
                 }
