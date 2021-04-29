@@ -59,7 +59,6 @@
 
 
         case 'read':
-            echo $_GET['id_chalet'];
         ?>
             <form action="./chalet_admin.php" method="get">
 
