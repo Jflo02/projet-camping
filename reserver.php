@@ -308,7 +308,7 @@ if(!isset($_GET['c'])){
                 <!-- Formulaire pour demander la réservation -->
                 <form action="./reserver.php" method="get">
                     <label for="date">Entrez la date du premier samedi de votre reservation :</label>
-                    <input type="date" id="date" name="date" required min="<?php echo $today?>"><br><br>
+                    <input type="date" id="date" name="date" required min="<?php echo $today?>" <?php if(isset($_GET['date'])){ echo "value=". $_GET['date'];}?>><br><br>
                     <label for="nbr_semaine">Combien de semaines ?:</label>
                     <input type="number" id="nbr_semaine" name="nbr_semaine" min=1 required><br><br>
                     <label for="cat">Le type de chalet :</label>

@@ -155,7 +155,7 @@
                     <li>WC</li>
                     <li>Barbecue extérieur</li>
                 </ul>
-                <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">réserver</a>
+                <a href="./affichage_promo.php?cat=1" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Voir les offres</a>
 
             </div>
         </div>
@@ -239,7 +239,7 @@
                     <li>WC</li>
                     <li>Barbecue extérieur</li>
                 </ul>
-                <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">réserver</a>
+                <a href="./affichage_promo.php?cat=2" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Voir les offres</a>
 
             </div>
         </div>
@@ -323,7 +323,7 @@
                     <li>WC : 2</li>
                     <li>Barbecue extérieur</li>
                 </ul>
-                <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">réserver</a>
+                <a href="./affichage_promo.php?cat=3" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Voir les offres</a>
 
             </div>
         </div>
