@@ -58,10 +58,10 @@
 
 
         default:
-            $sql = 'SELECT * FROM reservation';
-            $resultat = mysqli_query($conn, $sql);
-            if ($resultat == FALSE) {
-                die("<br>Echec d'execution de la requete : " . $sql);
+            $sql3 = 'SELECT * FROM reservation';
+            $resultat3 = mysqli_query($conn, $sql3);
+            if ($resultat3 == FALSE) {
+                die("<br>Echec d'execution de la requete : " . $sql3);
             } else {
 
             ?>
@@ -79,7 +79,7 @@
                                     <th></th>
                                 </tr>
                             <?php
-                            while ($row = mysqli_fetch_assoc($resultat)) {
+                            while ($row = mysqli_fetch_assoc($resultat3)) {
                                 echo "<tr>";
                                 echo "<td>" . $row['id_client'] . "</td>";
                                 echo "<td>" . $row['id_chalet'] . "</td>";

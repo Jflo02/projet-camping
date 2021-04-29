@@ -26,11 +26,11 @@
 
                     <?php
 
-                    $sql = 'SELECT * FROM chalet inner join reservation on chalet.id_chalet = reservation.id_chalet WHERE id_client=' . $_SESSION['id_user'];
-                    $resultat = mysqli_query($conn, $sql);
+                    $sql3 = 'SELECT * FROM chalet inner join reservation on chalet.id_chalet = reservation.id_chalet WHERE id_client=' . $_SESSION['id_user'];
+                    $resultat3 = mysqli_query($conn, $sql3);
 
-                    if ($resultat == FALSE) {
-                        die("<br>Echec d'execution de la requete : " . $sql);
+                    if ($resultat3 == FALSE) {
+                        die("<br>Echec d'execution de la requete : " . $sql3);
                     } else {
                     ?>
                         <div class="container">
@@ -48,7 +48,7 @@
 
                                         </tr>
                                     <?php
-                                    while ($row = mysqli_fetch_assoc($resultat)) {
+                                    while ($row = mysqli_fetch_assoc($resultat3)) {
                                         echo "<tr>";
                                         //on cherche le debut de la semaine
                                         $sql = 'SELECT * FROM semaine WHERE id_semaine=' . $row['id_semaine'];
@@ -64,11 +64,11 @@
 
                                         //on cherche a quel chalet correspond le type
 
-                                        $sql = 'SELECT * FROM type_chalet WHERE id_type_chalet=' . $row['id_chalet'];
+                                        $sql = 'SELECT * FROM chalet inner join type_chalet on chalet.id_type_chalet = type_chalet.id_type_chalet WHERE id_chalet=' . $row['id_chalet'];
                                         $resultat = mysqli_query($conn, $sql);
                                         $row2 = mysqli_fetch_assoc($resultat);
                                         echo "<td>" . $row2['libelle'] . "</td>";
-
+                                        
                                         //fin de la recherche
 
                                         $date = date("d-m-Y", strtotime($row['date_reservation']));
