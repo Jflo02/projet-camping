@@ -11,6 +11,8 @@
         <ul class="nav">
           <li><a href="./index.php">Accueil</a></li>
           <li><a href="./activites.php">Activités</a></li>
+          <li><a href="./chalet.php">Nos chalets</a></li>
+          <li><a href="./promo.php">Promos</a></li>
 
           
           <?php

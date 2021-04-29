@@ -18,11 +18,29 @@
     include("./en-tete.php");
     include("./menu.php");
     ?>
-    <div class="container">
-            <p class="jumbotron"><a href="./chalet.php">Voir nos chalets</a></p>
-            <p class="jumbotron"><a href="./promo.php">Voir nos chalets en promo !</a></p>
-    </div>
+<div id="page">
+    <h3 id="text_intro"> Vivez des vacances exeptionnelles au <br>Camping Piscine Hashtag Plaisir ! </h3>
 
+    <div class="container align-self-center">
+        <div class="row">
+            <div class="col-2">
+                
+            </div>
+            <div class="col-4">
+                <h5 id="titre_1">Le Camping qui vous fera rêver </h5>
+                <p>Avec les nombreuses activités comme le tennis, le ping pong, la pétanque, le VTT et avec notre grand parc aquatique
+                    qui ravira les petits et les grands, vous passerez des vacances de rêve à la fois reposantes et amusantes.</p>
+            </div>
+            <div class="col-4" id="infos_pratiques">
+                <h5> Infos pratiques </h5>
+                
+            </div>
+            <div class="col-2">
+                
+            </div>
+        </div>
+    </div>
+</div>
 
 
 </body>
