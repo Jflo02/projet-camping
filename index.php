@@ -31,9 +31,12 @@
                 <p>Avec les nombreuses activités comme le tennis, le ping pong, la pétanque, le VTT et avec notre grand parc aquatique
                     qui ravira les petits et les grands, vous passerez des vacances de rêve à la fois reposantes et amusantes.</p>
             </div>
-            <div class="col-4" id="infos_pratiques">
-                <h5> Infos pratiques </h5>
-                
+            <div class="col-4 text-left" id="infos_pratiques">
+                <h5 id="infos_pratiques"> Infos pratiques </h5>
+                <p><img src="./photos/calendrier.svg" alt="calendrier" width="6%"> Ouvert du 3 mai au 26 septembre 2021</p>
+                <p><img src="./photos/bungalow.svg" alt="Bungalow" width="6%"> 500 emplacements</p>
+                <p><img src="./photos/localisation.svg" alt="localisation" width="6%"> 2 rue des roses <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 59430 Douai - France </p>
+                <p><img src="./photos/tel.svg" alt="telephone" width="6%"> +33 06 37 ** ** **</p>
             </div>
             <div class="col-2">
                 
