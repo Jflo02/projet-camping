@@ -14,15 +14,17 @@
           <li><a href="./chalet.php">Nos chalets</a></li>
           <li><a href="./promo.php">Promos</a></li>
 
-          
+
           <?php
           if (isset($_SESSION['type'])) {
-          ?>
 
-            
-            <li><a href="./mon_compte.php?c=default">Mon compte</a></li>
+
+            if ($_SESSION['type'] == "client") {
+          ?>
+              <li><a href="./mon_compte.php?c=default">Mon compte</a></li>
 
             <?php
+            }
             if ($_SESSION['type'] == "admin") {
             ?>
 
