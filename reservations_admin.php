@@ -104,7 +104,7 @@
                                 }
                                 echo "<td>" . $row['prix'] ."</td>";
                                 //fin de la validité
-                                echo "<td><a href=./reservations_admin?c=read&id_client=" . $row['id_chalet'] . ">éditer(NE MARCHE PAS/A CODER)</a></td>";
+                                echo "<td><a href=./detail_reservation_admin.php?c=default&id_chalet=" . $row['id_chalet'] . "&id_semaine=". $row['id_semaine'] . ">éditer</a></td>";
                             }
                             echo "</tr>";
                         }
