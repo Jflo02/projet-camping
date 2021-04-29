@@ -157,7 +157,7 @@ if(!isset($_GET['c'])){
                 Foreach($array_date_str as $date_str){
                     $sql="Select *
                     from prix_special inner join semaine on prix_special.id_semaine = semaine.id_semaine inner join chalet on prix_special.id_chalet = chalet.id_chalet
-                    where id_type_chalet =". $_GET['cat'] ." and date_debut = '". $date_str ."'";
+                    where id_type_chalet =". $_GET['cat'] ." and date_debut = '". $date_str ."' and (semaine.id_semaine, chalet.id_chalet) not in (select id_semaine, id_chalet from reservation)";
                     $result = mysqli_query($conn, $sql);
                     //on créer un tableau pour savoir les semaines en promos
                     if (mysqli_num_rows($result)==0) {
