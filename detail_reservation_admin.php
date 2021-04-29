@@ -26,7 +26,16 @@
 
 
             case 'update':
-
+                $sql = 'UPDATE reservation SET valide= ' . $_GET['etat_resa'] . ' where id_chalet= ' . $_GET['id_chalet']. ' AND id_semaine= ' . $_GET['id_semaine'];
+    
+                $resultat = mysqli_query($conn, $sql);
+                if ($resultat == FALSE) {
+                    die("<br>Echec d'execution de la requete : " . $sql);
+                } else {
+                    echo "Enregistrement mis à jour<br><br>";
+                    echo '<a href="./reservations_admin.php?c=default">Retour aux réservations</a>';
+                }
+            
 
                 break;
 
@@ -58,13 +67,13 @@
 
                     echo '<br>';
     ?>
-                    <form action="./chalet_admin.php" method="get">
+                    <form action="./detail_reservation_admin.php" method="get">
 
                         <label for="libelle">Valide :</label>
                         <input type="radio" id="etat_resa" name="etat_resa" value="1" ><br><br>
 
                         <label for="libelle">Invalide :</label>
-                        <input type="radio" id="etat_resa" name="etat_resa" value="2"><br><br>
+                        <input type="radio" id="etat_resa" name="etat_resa" value="0"><br><br>
 
                         <input type="hidden" name="id_chalet" value="<?php echo $_GET['id_chalet'] ?>">
                         <input type="hidden" name="id_semaine" value="<?php echo $_GET['id_semaine'] ?>">
