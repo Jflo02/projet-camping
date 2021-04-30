@@ -35,7 +35,7 @@ if (isset($_POST['mdp_user'])) {
             exit();
         } else {
 
-            $sql = 'SELECT * from administrateur where login_administrateur=\'' . mysqli_real_escape_string($conn, $_POST["mail_user"]) . '\' and mdp_administrateur=\'' . mysqli_real_escape_string($conn,$_POST["mdp_user"]) . '\'';
+            $sql = 'SELECT * from administrateur where login_administrateur=\'' . mysqli_real_escape_string($conn, $_POST["mail_user"]) . '\' and mdp_administrateur=\'' . mysqli_real_escape_string($conn, $_POST["mdp_user"]) . '\'';
 
 
             $resultat = mysqli_query($conn, $sql);
@@ -98,38 +98,59 @@ if (isset($_POST['mdp_user'])) {
 
                 <?php
 
-                if ($erreur_login) {
-                    echo 'Identifiant ou mot de passe incorrecte';
-                }
 
-
-
-
-
-
-
-
-                if (isset($_SESSION['type'])) {
-
-                    echo 'Hello ' . (($_SESSION['type'] == "Administrateur") ? "Administrateur " : "client ") . $_SESSION['nom_user'] . ' ' . $_SESSION['prenom_user'];
-                    echo '<br><a href="./login.php?logout=1">Se deconnecter</a><br><br>';
-                    echo '<br><a href="./index.php">Aller à l\'acceuil</a><br><br>';
-                }
 
 
                 if (!isset($_SESSION['id_user'])) {
                 ?>
-                    <form action="./login.php" method="post">
-                        <label for="nom">Mail :</label>
-                        <input type="text" id="mail_user" name="mail_user"><br><br>
-                        <label for="password">Mot de passe :</label>
-                        <input type="password" id="mdp_user" name="mdp_user"><br><br>
-                        <input type="submit" value="Envoyer">
-                    </form>
-                    
+
+                    <div class="container">
+                        <div class=" text-center mt-5 ">
+                            <h1>Connexion</h1>
+                        </div>
+                        <div class="row ">
+                            <div class="col-lg-7 mx-auto">
+                                <div class="card mt-2 mx-auto p-4 bg-light">
+                                    <div class="card-body bg-light">
+                                        <div class="container">
+                                            <form id="contact-form" role="form" action="./login.php" method="post">
+                                                <div class="controls">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group"> <label for="mail_user">Mail</label> <input id="mail_user" type="text" name="mail_user" class="form-control" placeholder="Entrez votre mail" required="required" data-error="Entrez votre mail."> </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group"> <label for="mdp_user">Mot de passe</label> <input id="mdp_user" type="password" name="mdp_user" class="form-control" placeholder="Entrez votre mot de passe" required="required" data-error="Entrez votre mot de passe."> </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-12"> <input type="submit" class="btn btn-success btn-send pt-2 btn-block " value="Se connecter"> </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
 
                 <?php
+
+
+
                 }
+
+
+                if ($erreur_login) {
+                    echo '<br><br><div class="container jumbotron"><h3><p class="text-danger"><b>Identifiant ou mot de passe incorrect</b></p></h3></div>';
+                }
+
                 ?>
             </div>
         </div>

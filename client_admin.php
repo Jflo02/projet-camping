@@ -26,38 +26,74 @@
 
         case 'create':
     ?>
-            <form action="./client_admin.php" method="get">
-                <label for="nom">Nom :</label>
-                <input type="text" id="nom_pers" name="nom_pers"><br><br>
 
-                <label for="prenom">Prénom :</label>
-                <input type="text" id="prenom_pers" name="prenom_pers"><br><br>
 
-                <label for="DN">Date de naissance :</label>
-                <input type="date" id="DN_pers" name="DN_pers"><br><br>
+            <div class="container">
+                <div class=" text-center mt-5 ">
+                    <h1>Fiche Client</h1>
+                </div>
+                <div class="row ">
+                    <div class="col-lg-7 mx-auto">
+                        <div class="card mt-2 mx-auto p-4 bg-light">
+                            <div class="card-body bg-light">
+                                <div class="container">
+                                    <form id="contact-form" role="form" action="./client_admin.php" method="get">
+                                        <div class="controls">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="prenom_pers">Prénom</label> <input id="prenom_pers" type="text" name="prenom_pers" class="form-control" placeholder="Entrez le prénom" required="required" data-error="Entrez le prénom."> </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="nom_pers">Nom</label> <input id="nom_pers" type="text" name="nom_pers" class="form-control" placeholder="Entrez le nom de famille" required="required" data-error="Entrez le nom de famille."> </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="mail_pers">Email</label> <input id="mail_pers" type="email" name="mail_pers" class="form-control" placeholder="Entrez l'email" required="required" data-error="Entrez un email valide."> </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="DN_pers">Date De Naissance</label> <input id="DN_pers" type="date" name="DN_pers" class="form-control" placeholder="Date de naissance" required="required" data-error="Entrez une date de naissance."> </div>
+                                                </div>
+                                            </div>
 
-                <label for="mail">Mail :</label>
-                <input type="mail" id="mail" name="mail"><br><br>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="cp_pers">Code Postal</label> <input id="cp_pers" type="text" name="cp_pers" class="form-control" placeholder="Entrez le code postal" required="required" data-error="Entrez le code postal"> </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="adresse_pers">Adresse</label> <input id="adresse_pers" type="text" name="adresse_pers" class="form-control" placeholder="Entrez l'adresse" required="required" data-error="Entrez l'adresse"> </div>
+                                                </div>
+                                            </div>
 
-                <label for="telephone">telephone :</label>
-                <input type="telephone" id="telephone" name="telephone"><br><br>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="ville_pers">Ville</label> <input id="ville_pers" type="text" name="ville_pers" class="form-control" placeholder="Entrez la ville" required="required" data-error="Entrez la ville"> </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="tel_pers">Telephone</label> <input id="tel_pers" type="text" name="tel_pers" class="form-control" placeholder="Entrez le telephone" required="required" data-error="Entrez le telephone"> </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group"> <label for="mdp_pers">Mot de passe</label> <input id="mdp_pers" type="password" name="mdp_pers" class="form-control" placeholder="Entrez le mot de passe" required="required" data-error="Entrez le mot de passe" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"> </div>
+                                                </div>
+                                            </div>
 
-                <label for="adresse">adresse :</label>
-                <input type="text" id="adresse" name="adresse"><br><br>
 
-                <label for="cp_ville">code postal :</label>
-                <input type="text" id="cp_ville" name="cp_ville"><br><br>
 
-                <label for="password">Mot de passe :</label>
-                <input type="password" id="mdp_pers" name="mdp_pers"><br><br>
+                                            <div class="row">
+                                                <input type="hidden" name="c" value="add">
+                                                <div class="col-md-12"> <input type="submit" class="btn btn-success btn-send pt-2 btn-block " value="Envoyer"> </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                <label for="Ville">Ville :</label>
-                <input type="text" id="ville" name="ville"><br><br>
-
-                <input type="hidden" name="c" value="add">
-
-                <input type="submit" value="Valider">
-            </form>
 
 
             <?php
@@ -65,7 +101,7 @@
 
         case 'add':
 
-            $sql = "INSERT INTO client (nom, prenom, date_naissance, mail, telephone, adresse, cp_ville, mdp_client, ville) values ('" . mysqli_real_escape_string($conn,$_GET['nom_pers']) . "','" . mysqli_real_escape_string($conn,$_GET['prenom_pers']) . "','" . mysqli_real_escape_string($conn,$_GET['DN_pers']) . "','" . mysqli_real_escape_string($conn,$_GET['mail']) . "','" . mysqli_real_escape_string($conn,$_GET['telephone']) . "','" . mysqli_real_escape_string($conn,$_GET['adresse']) . "','" . mysqli_real_escape_string($conn,$_GET['cp_ville']) . "','" . mysqli_real_escape_string($conn,$_GET['mdp_pers']) . "','" . mysqli_real_escape_string($conn,$_GET['ville']) . "')";
+            $sql = "INSERT INTO client (nom, prenom, date_naissance, mail, telephone, adresse, cp_ville, mdp_client, ville) values ('" . mysqli_real_escape_string($conn, $_GET['nom_pers']) . "','" . mysqli_real_escape_string($conn, $_GET['prenom_pers']) . "','" . mysqli_real_escape_string($conn, $_GET['DN_pers']) . "','" . mysqli_real_escape_string($conn, $_GET['mail_pers']) . "','" . mysqli_real_escape_string($conn, $_GET['tel_pers']) . "','" . mysqli_real_escape_string($conn, $_GET['adresse_pers']) . "','" . mysqli_real_escape_string($conn, $_GET['cp_pers']) . "','" . mysqli_real_escape_string($conn, $_GET['mdp_pers']) . "','" . mysqli_real_escape_string($conn, $_GET['ville_pers']) . "')";
             $resultat = mysqli_query($conn, $sql);
             if ($resultat == FALSE) {
                 die("<br>Echec d'execution de la requete : " . $sql);
@@ -85,44 +121,78 @@
             } elseif (mysqli_num_rows($resultat) == 1) {
                 $row = mysqli_fetch_assoc($resultat);
             ?>
-                <form action="./client_admin.php" method="get">
-                    <label for="nom">Nom :</label>
-                    <input type="text" id="nom_pers" name="nom_pers" value="<?php echo $row['nom'] ?>"><br><br>
+                <div class="container">
+                    <div class=" text-center mt-5 ">
+                        <h1>Fiche Client</h1>
+                    </div>
+                    <div class="row ">
+                        <div class="col-lg-7 mx-auto">
+                            <div class="card mt-2 mx-auto p-4 bg-light">
+                                <div class="card-body bg-light">
+                                    <div class="container">
+                                        <form id="contact-form" role="form" action="./client_admin.php" method="get">
+                                            <div class="controls">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group"> <label for="prenom_pers">Prénom</label> <input id="prenom_pers" type="text" name="prenom_pers" class="form-control" placeholder="Entrez votre prénom" required="required" data-error="Entrez votre prénom." value="<?php echo $row['prenom'] ?>"> </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group"> <label for="nom_pers">Nom</label> <input id="nom_pers" type="text" name="nom_pers" class="form-control" placeholder="Entrez votre nom de famille" required="required" data-error="Entrez votre nom de famille." value="<?php echo $row['nom'] ?>"> </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group"> <label for="mail_pers">Email</label> <input id="mail_pers" type="email" name="mail_pers" class="form-control" placeholder="Entrez votre email" required="required" data-error="Entrez un email valide." value="<?php echo $row['mail'] ?>"> </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group"> <label for="DN_pers">Date De Naissance</label> <input id="DN_pers" type="date" name="DN_pers" class="form-control" placeholder="Date de naissance" required="required" data-error="Entrez une date de naissance." value="<?php echo $row['date_naissance'] ?>"> </div>
+                                                    </div>
+                                                </div>
 
-                    <label for="prenom">Prénom :</label>
-                    <input type="text" id="prenom_pers" name="prenom_pers" value="<?php echo $row['prenom'] ?>"><br><br>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group"> <label for="cp_pers">Code Postal</label> <input id="cp_pers" type="text" name="cp_pers" class="form-control" placeholder="Entrez votre code postal" required="required" data-error="Entrez votre code postal" value="<?php echo $row['cp_ville'] ?>"> </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group"> <label for="adresse_pers">Adresse</label> <input id="adresse_pers" type="text" name="adresse_pers" class="form-control" placeholder="Entrez votre adresse" required="required" data-error="Entrez votre adresse" value="<?php echo $row['adresse'] ?>"> </div>
+                                                    </div>
+                                                </div>
 
-                    <label for="DN">Date de naissance :</label>
-                    <input type="date" id="DN_pers" name="DN_pers" value="<?php echo $str_date ?>"><br><br>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group"> <label for="ville_pers">Ville</label> <input id="ville_pers" type="text" name="ville_pers" class="form-control" placeholder="Entrez votre ville" required="required" data-error="Entrez votre ville" value="<?php echo $row['ville'] ?>"> </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group"> <label for="tel_pers">Telephone</label> <input id="tel_pers" type="text" name="tel_pers" class="form-control" placeholder="Entrez votre telephone" required="required" data-error="Entrez votre telephone" value="<?php echo $row['telephone'] ?>"> </div>
+                                                    </div>
+                                                </div>
 
-                    <label for="mail">Mail :</label>
-                    <input type="mail" id="mail" name="mail" value="<?php echo $row['mail'] ?>"><br><br>
 
-                    <label for="telephone">telephone :</label>
-                    <input type="telephone" id="telephone" name="telephone" value="<?php echo $row['telephone'] ?>"><br><br>
 
-                    <label for="adresse">adresse :</label>
-                    <input type="text" id="adresse" name="adresse" value="<?php echo $row['adresse'] ?>"><br><br>
+                                                <div class="row">
+                                                    <input type="hidden" name="id_client" value="<?php echo $row['id_client'] ?>">
+                                                    <input type="hidden" name="c" value="update">
+                                                    <div class="col-md-12"> <input type="submit" class="btn btn-success btn-send pt-2 btn-block " value="Envoyer"> </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                    <label for="cp_ville">code postal :</label>
-                    <input type="text" id="cp_ville" name="cp_ville" value="<?php echo $row['cp_ville'] ?>"><br><br>
 
-                    <label for="Ville">Ville :</label>
-                    <input type="text" id="ville" name="ville" value="<?php echo $row['ville'] ?>"><br><br>
 
-                    <input type="hidden" name="id_client" value="<?php echo $row['id_client'] ?>">
 
-                    <input type="hidden" name="c" value="update">
-
-                    <input type="submit" value="Appuie pour faire les changements">
-                </form>
             <?php
             }
             break;
 
         case 'update':
 
-            $sql = "UPDATE client SET nom='" . $_GET['nom_pers'] . "', prenom='" . $_GET['prenom_pers'] . "',date_naissance='" . $_GET['DN_pers'] . "',mail='" . $_GET['mail'] . "', telephone='" . $_GET['telephone'] . "', adresse='" . $_GET['adresse'] . "', cp_ville='" . $_GET['cp_ville'] . "', ville='" . $_GET['ville'] . "' where id_client=" . $_GET['id_client'];
+            $sql = "UPDATE client SET nom='" . $_GET['nom_pers'] . "', prenom='" . $_GET['prenom_pers'] . "',date_naissance='" . $_GET['DN_pers'] . "',mail='" . $_GET['mail_pers'] . "', telephone='" . $_GET['tel_pers'] . "', adresse='" . $_GET['adresse_pers'] . "', cp_ville='" . $_GET['cp_pers'] . "', ville='" . $_GET['ville_pers'] . "' where id_client=" . $_GET['id_client'];
             $stmt = mysqli_query($conn, $sql);
             if ($stmt == FALSE) {
                 die("<br>Echec d'execution de la requete : " . $sql);
