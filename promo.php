@@ -90,7 +90,7 @@
                 <ul class="text-left ">
                     <?php
                     //prix special pr chalet mini basse saison
-                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 1 AND `semaine`.`id_saison`=1';
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 1 AND `semaine`.`id_saison`=1 and (semaine.id_semaine, chalet.id_chalet) not in (select id_semaine, id_chalet from reservation)';
                     $resultat = mysqli_query($conn, $sql);
                     if ($resultat) {
                         if (mysqli_num_rows($resultat) == 1) {
@@ -108,7 +108,7 @@
 
                     //prix special pr chalet mini moyenne saison
 
-                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 1 AND `semaine`.`id_saison`=2';
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 1 AND `semaine`.`id_saison`=2 and (semaine.id_semaine, chalet.id_chalet) not in (select id_semaine, id_chalet from reservation)';
                     $resultat = mysqli_query($conn, $sql);
                     if ($resultat) {
                         if (mysqli_num_rows($resultat) == 1) {
@@ -126,7 +126,7 @@
 
                     //prix special pr chalet mini en haute saison
 
-                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 1 AND `semaine`.`id_saison`=3';
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 1 AND `semaine`.`id_saison`=3 and (semaine.id_semaine, chalet.id_chalet) not in (select id_semaine, id_chalet from reservation)';
                     $resultat = mysqli_query($conn, $sql);
                     if ($resultat) {
                         if (mysqli_num_rows($resultat) == 1) {
@@ -155,7 +155,7 @@
                     <li>WC</li>
                     <li>Barbecue extérieur</li>
                 </ul>
-                <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">réserver</a>
+                <a href="./affichage_promo.php?cat=1" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Voir les offres</a>
 
             </div>
         </div>
@@ -173,7 +173,7 @@
                     <?php
 
                     //prix special pr chalet grand luxe basse saison
-                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 2 AND `semaine`.`id_saison`=1';
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 2 AND `semaine`.`id_saison`=1 and (semaine.id_semaine, chalet.id_chalet) not in (select id_semaine, id_chalet from reservation)';
                     $resultat = mysqli_query($conn, $sql);
                     if ($resultat) {
                         if (mysqli_num_rows($resultat) == 1) {
@@ -191,7 +191,7 @@
 
                     //prix special pr chalet grand luxe moyenne saison
 
-                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 2 AND `semaine`.`id_saison`=2';
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 2 AND `semaine`.`id_saison`=2 and (semaine.id_semaine, chalet.id_chalet) not in (select id_semaine, id_chalet from reservation)';
                     $resultat = mysqli_query($conn, $sql);
                     if ($resultat) {
                         if (mysqli_num_rows($resultat) == 1) {
@@ -209,7 +209,7 @@
 
                     //prix special pr chalet grand luxe en haute saison
 
-                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 2 AND `semaine`.`id_saison`=3';
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 2 AND `semaine`.`id_saison`=3 and (semaine.id_semaine, chalet.id_chalet) not in (select id_semaine, id_chalet from reservation)';
                     $resultat = mysqli_query($conn, $sql);
                     if ($resultat) {
                         if (mysqli_num_rows($resultat) == 1) {
@@ -239,7 +239,7 @@
                     <li>WC</li>
                     <li>Barbecue extérieur</li>
                 </ul>
-                <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">réserver</a>
+                <a href="./affichage_promo.php?cat=2" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Voir les offres</a>
 
             </div>
         </div>
@@ -256,7 +256,7 @@
                     <?php
 
                     //prix special pr chalet grand luxe basse saison
-                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 3 AND `semaine`.`id_saison`=1';
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 3 AND `semaine`.`id_saison`=1 and (semaine.id_semaine, chalet.id_chalet) not in (select id_semaine, id_chalet from reservation)';
                     $resultat = mysqli_query($conn, $sql);
                     if ($resultat) {
                         if (mysqli_num_rows($resultat) == 1) {
@@ -274,7 +274,7 @@
 
                     //prix special pr chalet grand luxe moyenne saison
 
-                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 3 AND `semaine`.`id_saison`=2';
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 3 AND `semaine`.`id_saison`=2 and (semaine.id_semaine, chalet.id_chalet) not in (select id_semaine, id_chalet from reservation)';
                     $resultat = mysqli_query($conn, $sql);
                     if ($resultat) {
                         if (mysqli_num_rows($resultat) == 1) {
@@ -292,7 +292,7 @@
 
                     //prix special pr chalet grand luxe en haute saison
 
-                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 3 AND `semaine`.`id_saison`=3';
+                    $sql = 'SELECT MIN(prix_modifie) FROM `chalet` inner join `prix_special` on `chalet`.`id_chalet` = `prix_special`.`id_chalet` inner join `semaine` on `semaine`.`id_semaine`= `prix_special`.`id_semaine` where `chalet`.`id_type_chalet` = 3 AND `semaine`.`id_saison`=3 and (semaine.id_semaine, chalet.id_chalet) not in (select id_semaine, id_chalet from reservation)';
                     $resultat = mysqli_query($conn, $sql);
                     if ($resultat) {
                         if (mysqli_num_rows($resultat) == 1) {
@@ -323,7 +323,7 @@
                     <li>WC : 2</li>
                     <li>Barbecue extérieur</li>
                 </ul>
-                <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">réserver</a>
+                <a href="./affichage_promo.php?cat=3" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Voir les offres</a>
 
             </div>
         </div>

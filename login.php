@@ -7,7 +7,7 @@ if (isset($_POST['mdp_user'])) {
     include("../connexion.php");
 
 
-    $sql = 'SELECT * from Client where mail=\'' . $_POST["mail_user"] . '\' and mdp_client=\'' . $_POST["mdp_user"] . '\'';
+    $sql = 'SELECT * from Client where mail=\'' . mysqli_real_escape_string($conn, $_POST["mail_user"]) . '\' and mdp_client=\'' . mysqli_real_escape_string($conn, $_POST["mdp_user"]) . '\'';
 
 
     $resultat = mysqli_query($conn, $sql);
@@ -21,6 +21,7 @@ if (isset($_POST['mdp_user'])) {
             $_SESSION['id_user'] = $row['id_client'];
             $_SESSION['nom_user'] = $row['nom'];
             $_SESSION['prenom_user'] = $row['prenom'];
+            $_SESSION['mail'] = $row['mail'];
             $_SESSION['type'] = "client";
 
             $url = $_SERVER['HTTP_REFERER'];
@@ -34,7 +35,7 @@ if (isset($_POST['mdp_user'])) {
             exit();
         } else {
 
-            $sql = 'SELECT * from administrateur where login_administrateur=\'' . $_POST["mail_user"] . '\' and mdp_administrateur=\'' . $_POST["mdp_user"] . '\'';
+            $sql = 'SELECT * from administrateur where login_administrateur=\'' . mysqli_real_escape_string($conn, $_POST["mail_user"]) . '\' and mdp_administrateur=\'' . mysqli_real_escape_string($conn,$_POST["mdp_user"]) . '\'';
 
 
             $resultat = mysqli_query($conn, $sql);
