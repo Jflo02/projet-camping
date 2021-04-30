@@ -33,7 +33,7 @@
 
 
             $sql = "INSERT INTO client (nom, prenom, date_Naissance, mail, telephone, adresse, cp_ville, mdp_client, ville ) values
-            ('" . $_GET['nom_pers'] . "','" . $_GET['prenom_pers'] . "','" . $_GET['DN_pers'] . "','" . $_GET['mail_pers'] . "','" . $_GET['tel_pers'] . "','" . $_GET['adresse_pers'] . "','" . $_GET['cp_pers'] . "','" . $_GET['mdp_pers'] . "','" . $_GET['ville_pers'] . "')";
+            ('" . mysqli_real_escape_string($conn,$_GET['nom_pers']) . "','" . mysqli_real_escape_string($conn,$_GET['prenom_pers']) . "','" . mysqli_real_escape_string($conn,$_GET['DN_pers']) . "','" . mysqli_real_escape_string($conn,$_GET['mail_pers']) . "','" . mysqli_real_escape_string($conn,$_GET['tel_pers']) . "','" . mysqli_real_escape_string($conn,$_GET['adresse_pers']) . "','" . mysqli_real_escape_string($conn,$_GET['cp_pers']) . "','" . mysqli_real_escape_string($conn,$_GET['mdp_pers']) . "','" . mysqli_real_escape_string($conn,$_GET['ville_pers']) . "')";
             $resultat = mysqli_query($conn, $sql);
             if ($resultat == FALSE) { //si on peut pas ajouter
 
