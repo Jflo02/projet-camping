@@ -45,6 +45,24 @@
     </div>
 </div>
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <img src="./photos/piscine.jpg" alt="Piscine" width="100%">
+        </div>
+        <div class="col-3">
+            <img src="./photos/bungalow_mini.jpg" alt="bungalow" width="100%">
+        </div>
+        <div class="col-3">
+            <img src="./photos/VTT.jpg" alt="VTT" width="100%">
+        </div>
+        <div class="col-3">
+            <img src="./photos/petanque.jpg" alt="petanque" width="100%">
+        </div>
+    </div>
+</div>
+
+
 
 </body>
 <?php
