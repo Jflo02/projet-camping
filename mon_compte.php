@@ -34,7 +34,7 @@
                         die("Il manque une valeur pour " . $key);
                     }
                 }
-                $sql = "UPDATE client SET nom='" . $_GET['nom_pers'] . "', prenom='" . $_GET['prenom_pers'] . "',date_naissance='" . $_GET['DN_pers'] . "',mail='" . $_GET['mail'] . "', telephone='" . $_GET['telephone'] . "', adresse='" . $_GET['adresse'] . "', cp_ville='" . $_GET['cp_ville'] . "' , mdp_client='" . $_GET['mdp_pers'] . "', ville='" . $_GET['ville'] . "' where id_client=" . $_GET['id_client'];
+                $sql = "UPDATE client SET nom='" . mysqli_real_escape_string($conn,$_GET['nom_pers']) . "', prenom='" . mysqli_real_escape_string($conn,$_GET['prenom_pers']) . "',date_naissance='" . mysqli_real_escape_string($conn,$_GET['DN_pers']) . "',mail='" . mysqli_real_escape_string($conn,$_GET['mail']) . "', telephone='" . mysqli_real_escape_string($conn,$_GET['telephone']) . "', adresse='" . mysqli_real_escape_string($conn,$_GET['adresse']) . "', cp_ville='" . mysqli_real_escape_string($conn,$_GET['cp_ville']) . "' , mdp_client='" . mysqli_real_escape_string($conn,$_GET['mdp_pers']) . "', ville='" . mysqli_real_escape_string($conn,$_GET['ville']) . "' where id_client=" . $_GET['id_client'];
                 $stmt = mysqli_query($conn, $sql);
                 if ($stmt == FALSE) {
                     die("<br>Echec d'execution de la requete : " . $sql);
